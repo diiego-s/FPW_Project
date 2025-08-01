@@ -1,2 +1,2 @@
 01/08 - D
-    creazione del server. Manca il file db.js per il collegamento al database ancora da creare
+    creazione del server e progetto vue. Manca il file db.js per il collegamento al database ancora da creare
