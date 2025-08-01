@@ -1,4 +1,4 @@
-# Travel_io
+# travel_io
 
 This template should help get you started developing with Vue 3 in Vite.
 
