@@ -1,0 +1,20 @@
+:root{
+    --primary:#1070be;
+    --secondary:#FBF7F0;
+    --tertiary:#1F93AC;
+    --white:#ffffff;
+    --black:#4c5052;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url(./fonts/Roboto-VariableFont_wdth\,wght.ttf);
+}
+
+body{
+    font-family: Roboto;
+}
+
+*{
+    box-sizing: border-box;
+}
