@@ -5,13 +5,17 @@ body{
 }
 
 header{
-    background: radial-gradient(circle, var(--white)10%, var(--primary)35%, var(--tertiary));
+    background: radial-gradient(circle, var(--white)5%, var(--primary)35%, var(--tertiary));
     text-align: center;
     margin-bottom: 0px;
 }
 
 h1, h2, h3{
     color: var(--primary);
+}
+
+#info{
+    font-size: 15px;
 }
 
 nav{

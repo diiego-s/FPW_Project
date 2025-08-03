@@ -8,8 +8,8 @@
   <Header></Header>
   <div class="cols">
     <RouterView />
-    <Footer></Footer>
   </div>
+  <Footer></Footer>
 </template>
 
 <style>

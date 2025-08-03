@@ -7,10 +7,11 @@
 
 <style>
     footer{
-        background: radial-gradient(circle, var(--primary) 10%, var(--tertiary));
+        background: linear-gradient(90deg, var(--primary) 10%, var(--tertiary));
         color: var(--white);
-        text-align: center;
+        text-align: left;
         padding: 20px;
         font-size: 14px;
+       
     }
 </style>
