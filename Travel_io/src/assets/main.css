@@ -2,6 +2,7 @@
 
 body{
     background: linear-gradient(to bottom, var(--white)35%, var(--secondary)100%);
+    margin: 30px;
 }
 
 header{
@@ -29,8 +30,13 @@ h1, h2, h3{
 }
 
 nav{
-    background: var(--secondary);
+    border-style: solid;
+    border-color: rgba(128, 128, 128, 0.359);
+    border-radius: 25px;
     text-align: center;
     position: sticky;
-    top: 0px;
+    padding-top: 15px;
+    margin-top: 5px;
+    margin-left: 230px;
+    margin-right: 230px;
 }
