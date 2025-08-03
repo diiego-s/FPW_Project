@@ -4,7 +4,7 @@ const pool = new Pool({
     host: 'localhost',
     database: 'travel_io',
     password: 'l',
-    port: '5342'
+    port: '5432',
 });
 
 module.exports = pool;
