@@ -33,6 +33,10 @@ body{
         position: sticky;
         top: 0px;
     }
+
+    header{
+        background: radial-gradient(circle, var(--white)5%, var(--primary)35%, var(--tertiary));
+    }
 }
 
 @media only screen and (max-width: 768px){
@@ -53,5 +57,9 @@ body{
     #navbar li {
         display: list-item;
         border-left: none;
+    }
+
+    header{
+        background: radial-gradient(circle, var(--white)50%, var(--primary)35%, var(--tertiary));
     }
 }

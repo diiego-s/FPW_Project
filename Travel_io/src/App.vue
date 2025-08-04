@@ -7,18 +7,24 @@
 </script>
 
 <template>
-  <Header></Header>
-  <div class="cols">
-    <InfoBar></InfoBar>
-    <RouterView />
-    <Ad></Ad>
+  <div id="box">
+    <Header></Header>
+      <div class="cols">
+        <InfoBar></InfoBar>
+        <RouterView />
+        <Ad></Ad>
+      </div>
+      <Footer></Footer>
   </div>
-  <Footer></Footer>
 </template>
 
 <style>
 .cols {
   overflow: hidden;
+}
+#box{
+  margin-left: 30px;
+  margin-right: 30px;
 }
 </style>
 
