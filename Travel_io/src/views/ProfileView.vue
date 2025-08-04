@@ -1,3 +1,5 @@
 <template>
-    <h1>Profilo</h1>
+    <div class="col-2">
+        <h1>Profilo</h1>
+    </div>
 </template>
