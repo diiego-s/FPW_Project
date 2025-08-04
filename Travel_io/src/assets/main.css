@@ -2,7 +2,6 @@
 
 body{
     background: linear-gradient(to bottom, var(--white)35%, var(--secondary)100%);
-    margin: 30px;
 }
 
 header{
@@ -10,15 +9,19 @@ header{
     text-align: center;
     margin-bottom: 0px;
     border-radius: 25px;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 footer{
-        background: linear-gradient(90deg, var(--primary) 10%, var(--tertiary));
-        color: var(--white);
-        text-align: left;
-        padding: 20px;
-        font-size: 14px;
-        border-radius: 25px;
+    background: linear-gradient(90deg, var(--primary) 10%, var(--tertiary));
+    color: var(--white);
+    text-align: left;
+    padding: 20px;
+    font-size: 14px;
+    border-radius: 25px;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 h1, h2, h3{
@@ -27,6 +30,10 @@ h1, h2, h3{
 
 #info{
     font-size: 15px;
+}
+
+#homepage{
+    margin: 50px;
 }
 
 nav{
