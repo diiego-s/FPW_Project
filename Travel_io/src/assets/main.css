@@ -28,10 +28,6 @@ h1, h2, h3{
     color: var(--primary);
 }
 
-#info{
-    font-size: 15px;
-}
-
 #homepage{
     margin: 50px;
 }
