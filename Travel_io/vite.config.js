@@ -6,6 +6,18 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    host: 'localhost',
+    port: 5173,
+    proxy: {
+      '/api/': {
+        target: 'http://localhost:3000',
+        secure: false,
+        changeOrigin: false,
+        rewrite: path => path.replace(/^\/api/, '')
+      }
+    }
+  },
   plugins: [
     vue(),
     vueDevTools(),

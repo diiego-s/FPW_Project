@@ -11,7 +11,7 @@
     <Header></Header>
       <div class="cols">
         <InfoBar></InfoBar>
-        <RouterView />
+        <RouterView class="col-2" />
         <Ad></Ad>
       </div>
       <Footer></Footer>
