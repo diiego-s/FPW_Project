@@ -5,7 +5,7 @@
 -- Dumped from database version 14.17
 -- Dumped by pg_dump version 17.0
 
--- Started on 2025-08-03 15:59:50 CEST
+-- Started on 2025-08-04 22:21:54 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -24,14 +24,64 @@ SET row_security = off;
 -- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
--- *not* creating schema, since initdb creates it
+CREATE SCHEMA public;
 
 
 ALTER SCHEMA public OWNER TO postgres;
 
+--
+-- TOC entry 3716 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
+
+--
+-- TOC entry 215 (class 1259 OID 16607)
+-- Name: admin; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.admin (
+    id integer NOT NULL,
+    name character varying(20),
+    surname character varying(20),
+    description character varying(200),
+    photo character varying(20)
+);
+
+
+ALTER TABLE public.admin OWNER TO postgres;
+
+--
+-- TOC entry 214 (class 1259 OID 16606)
+-- Name: admin_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.admin_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.admin_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3718 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: admin_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.admin_id_seq OWNED BY public.admin.id;
+
 
 --
 -- TOC entry 209 (class 1259 OID 16572)
@@ -68,7 +118,7 @@ CREATE SEQUENCE public.holiday_packages_id_seq
 ALTER SEQUENCE public.holiday_packages_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3707 (class 0 OID 0)
+-- TOC entry 3719 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: holiday_packages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -111,7 +161,7 @@ CREATE SEQUENCE public.reviews_id_seq
 ALTER SEQUENCE public.reviews_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3708 (class 0 OID 0)
+-- TOC entry 3720 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: reviews_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -139,7 +189,15 @@ CREATE TABLE public.users (
 ALTER TABLE public.users OWNER TO postgres;
 
 --
--- TOC entry 3546 (class 2604 OID 16583)
+-- TOC entry 3553 (class 2604 OID 16610)
+-- Name: admin id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.admin ALTER COLUMN id SET DEFAULT nextval('public.admin_id_seq'::regclass);
+
+
+--
+-- TOC entry 3551 (class 2604 OID 16583)
 -- Name: holiday_packages id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -147,7 +205,7 @@ ALTER TABLE ONLY public.holiday_packages ALTER COLUMN id SET DEFAULT nextval('pu
 
 
 --
--- TOC entry 3547 (class 2604 OID 16584)
+-- TOC entry 3552 (class 2604 OID 16584)
 -- Name: reviews id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -155,7 +213,21 @@ ALTER TABLE ONLY public.reviews ALTER COLUMN id SET DEFAULT nextval('public.revi
 
 
 --
--- TOC entry 3696 (class 0 OID 16572)
+-- TOC entry 3710 (class 0 OID 16607)
+-- Dependencies: 215
+-- Data for Name: admin; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.admin (id, name, surname, description, photo) FROM stdin;
+1	Diego	Serra	Appassionato Apple da sempre: se non è della mela, non lo guarda nemmeno. Il suo sogno? Fare colazione con Tim Cook.	diego.png
+2	Giulia	Cannata	Esperta di make-up e outfit impeccabili. Riesce a coordinare rossetto e CSS con una precisione disarmante.	giulia.png
+3	Michele	Chillotti	Lazza nel cuore, cuffie sempre in testa. Se non lo trovi al computer, è perché sta imparando a memoria ogni barra del suo idolo.	chillo.png
+4	Matteo	Manai	Ama i motori più del caffè. Se sente un rombo in lontananza, lascia anche una riunione Zoom pur di guardare che macchina è.	matte.png
+\.
+
+
+--
+-- TOC entry 3704 (class 0 OID 16572)
 -- Dependencies: 209
 -- Data for Name: holiday_packages; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -170,7 +242,7 @@ COPY public.holiday_packages (id, destination, price, departure, info, days, pho
 
 
 --
--- TOC entry 3698 (class 0 OID 16576)
+-- TOC entry 3706 (class 0 OID 16576)
 -- Dependencies: 211
 -- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -185,21 +257,30 @@ COPY public.reviews (id, title, comment, stars, data, user_id, holiday_id) FROM 
 
 
 --
--- TOC entry 3700 (class 0 OID 16580)
+-- TOC entry 3708 (class 0 OID 16580)
 -- Dependencies: 213
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.users (username, password, name, surname, email, city, fav_city, photo) FROM stdin;
 diiegoserra	ogeid	Diego	Serra	diego.serra@falliti.com	Cagliari	New York City	diego.png
-_giuliacannata	ailuig	Giulia	Cannata	giulia.cannata@falliti.com	Cagliari	Verona	giulia.png
 micheleechillotti	elehcim	Michele	Chillotti	michele.chillotti@falliti.com	Sinnai	Tokyo	michele.png
-matte.manai	oettam	Matteo	Manai	matteo.manai@falliti.com	Cagliari	Barcellona	matteo.png
+_giuliacannata	ailuig	Giulia	Cannata	giulia.cannata@falliti.com	Quartu S.E.	Verona	giulia.png
+matte.manai	oettam	Matteo	Manai	matteo.manai@falliti.com	Quartu S.E.	Barcellona	matteo.png
 \.
 
 
 --
--- TOC entry 3709 (class 0 OID 0)
+-- TOC entry 3721 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: admin_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.admin_id_seq', 4, true);
+
+
+--
+-- TOC entry 3722 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: holiday_packages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -208,7 +289,7 @@ SELECT pg_catalog.setval('public.holiday_packages_id_seq', 10, true);
 
 
 --
--- TOC entry 3710 (class 0 OID 0)
+-- TOC entry 3723 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -217,7 +298,16 @@ SELECT pg_catalog.setval('public.reviews_id_seq', 5, true);
 
 
 --
--- TOC entry 3549 (class 2606 OID 16586)
+-- TOC entry 3561 (class 2606 OID 16612)
+-- Name: admin admin_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.admin
+    ADD CONSTRAINT admin_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3555 (class 2606 OID 16586)
 -- Name: holiday_packages holiday_packages_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -226,7 +316,7 @@ ALTER TABLE ONLY public.holiday_packages
 
 
 --
--- TOC entry 3551 (class 2606 OID 16588)
+-- TOC entry 3557 (class 2606 OID 16588)
 -- Name: reviews reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -235,7 +325,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- TOC entry 3553 (class 2606 OID 16590)
+-- TOC entry 3559 (class 2606 OID 16590)
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -244,7 +334,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 3554 (class 2606 OID 16591)
+-- TOC entry 3562 (class 2606 OID 16591)
 -- Name: reviews reviews_holiday_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -253,7 +343,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- TOC entry 3555 (class 2606 OID 16596)
+-- TOC entry 3563 (class 2606 OID 16596)
 -- Name: reviews reviews_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -262,7 +352,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- TOC entry 3556 (class 2606 OID 16601)
+-- TOC entry 3564 (class 2606 OID 16601)
 -- Name: reviews reviews_user_id_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -271,7 +361,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- TOC entry 3706 (class 0 OID 0)
+-- TOC entry 3717 (class 0 OID 0)
 -- Dependencies: 5
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -280,7 +370,7 @@ REVOKE USAGE ON SCHEMA public FROM PUBLIC;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2025-08-03 15:59:50 CEST
+-- Completed on 2025-08-04 22:21:54 CEST
 
 --
 -- PostgreSQL database dump complete
