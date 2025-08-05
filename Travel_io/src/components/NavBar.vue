@@ -1,5 +1,27 @@
-<script setup>
-    import { RouterLink } from 'vue-router';
+<script>
+    import { RouterLink } from 'vue-router'
+    import {useSessionStore} from '@/stores/session'
+
+    export default {
+        components:{
+            RouterLink
+        },
+        data(){
+            return{
+                sessionStore: useSessionStore(),
+            }
+        },
+        methods:{
+            checkUser(){
+                if(this.sessionStore.getUser() == null){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+    }
+
 </script>
 
 <template>
@@ -9,9 +31,9 @@
                 <li><RouterLink exact-active-class="active" to="/about"><img class="icon" src="../assets/img/about.png" alt="icona about">About</RouterLink></li>
                 <li><RouterLink exact-active-class="active" to="/contacts"><img class="icon" src="../assets/img/contacts.png" alt="icona contacts">Contatti</RouterLink></li>
                 <li><RouterLink exact-active-class="active" to="/who"><img class="icon" src="../assets/img/who.png" alt="icona who">Chi siamo</RouterLink></li>
-                <li><RouterLink exact-active-class="active" to="/newPackage"><img class="icon" src="../assets/img/newPackage.png" alt="icona newPackage">Nuova Pacchetto</RouterLink></li>
-                <li><RouterLink exact-active-class="active" to="/login"><img class="icon" src="../assets/img/login.png" alt="icona login">Login</RouterLink></li>
-                <li><RouterLink exact-active-class="active" to="/profile"><img class="icon" src="../assets/img/profile.png" alt="icona profile">Profilo</RouterLink></li>
+                <li v-show="!checkUser()"><RouterLink exact-active-class="active" to="/login"><img class="icon" src="../assets/img/login.png" alt="icona login">Login</RouterLink></li>
+                <li v-show="checkUser()"><RouterLink exact-active-class="active" to="/newPackage"><img class="icon" src="../assets/img/newPackage.png" alt="icona newPackage">Nuova Pacchetto</RouterLink></li>
+                <li v-show="checkUser()"><RouterLink exact-active-class="active" to="/profile"><img class="icon" src="../assets/img/profile.png" alt="icona profile">Profilo</RouterLink></li>
             </ul>
         </nav>
 </template>
@@ -29,7 +51,7 @@
         list-style-type: none;
         display: inline-block;
         padding-left: 20px;
-        padding-right: 20px;
+        padding-right: 15px;
         border-left: 2px solid var(--primary);
         margin-top: 10px;
         margin-bottom: 10px;

@@ -1,4 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useSessionStore } from '@/stores/session'
+import * as Auth from '@/utils/auth'
+
 import HomeView from '@/views/HomeView.vue'
 import AboutView from '@/views/AboutView.vue'
 import ContactsView from '@/views/ContactsView.vue'
@@ -46,6 +49,24 @@ const router = createRouter({
       component: WhoView,
     },
   ],
+});
+
+router.beforeEach(async (to, from, next) => {
+  const sessionStore = useSessionStore();
+  if(to.matched.some(record => record.meta.requiresAuth)){
+    const userId = sessionStore.getUser();
+    const data = await Auth.isLogged();
+    if(userId === null || userId !== data.userId){
+      next({
+        path: '/login',
+        query: {redirect: to.fullPath}
+      });
+    } else {
+      next();
+    }
+  } else { 
+    next();
+  }
 })
 
 export default router
