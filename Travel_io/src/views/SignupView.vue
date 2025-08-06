@@ -140,6 +140,7 @@
         border-radius: 25px;
         text-align: center;
         padding: 15px;
+        width: fit-content;
 
         margin: auto;
         margin-bottom: 26px;
