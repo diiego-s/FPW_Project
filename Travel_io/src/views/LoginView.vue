@@ -16,7 +16,13 @@
                     useSessionStore().setUser(data.userId);
                     this.$router.push('/');
                 } else {
-                    alert('Login fallito');
+                    if (data.message === 'User not registered') {
+                        alert('User not registered');
+                    } else if (data.message === 'Invalid username or password') {
+                        alert('Invalid password');
+                    } else {
+                        alert('Login failed');
+                    }
                 }
             }
         }
