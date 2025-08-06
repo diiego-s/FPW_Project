@@ -7,7 +7,12 @@
         data(){
             return{
                 username: '',
-                password: ''
+                password: '',
+                name: '',
+                surname: '',
+                city: '',
+                favCity: '',
+                email: ''
             }
         },
         methods:{
@@ -33,14 +38,64 @@
 <template>
     <div class="col-2">
         
-        <form id="formLogin" action="login" method="POST">
+        <form id="formLogin" action="signup" method="POST">
             <div id="headerForm">
                 <img src="../assets/img/onlylogo.png" alt="logo di travel_io senza scritta" width="50">
                 <br>
                 <br>
-                <h1 style="color: var(--white);">log in</h1>
+                <h1 style="color: var(--white);">sign up</h1>
             </div>
 
+            <br>
+
+            <div class="boxForTwo">
+                <div class="boxOne">
+                    <label for="name">Nome</label>
+                    <br>
+                    <input type="text" name="name" v-model="name" />
+                </div>
+    
+    
+                <br>
+                <br>
+    
+                <div class="boxTwo">
+                    <label for="surname">Cognome</label>
+                    <br>
+                    <input type="text" name="surname" v-model="surname" />
+                </div>
+            </div>
+
+            <br>
+            <br>
+            
+            <label for="email">email</label>
+            <br>
+            <input type="email" name="email" v-model="email" />
+
+            <br>
+            <br>
+
+            <div class="boxForTwo">
+
+                <div class="boxOne">
+                    <label for="city">Citta di residenza</label>
+                    <br>
+                    <input type="text" name="city" v-model="city" />
+                </div>
+    
+                <br>
+                <br>
+
+                <div class="boxTwo">
+                    <label for="favCity">Citta preferita</label>
+                    <br>
+                    <input type="text" name="favCity" v-model="favCity" />
+                </div>
+            </div>
+
+
+            <br>
             <br>
 
             <label for="username">username</label>
@@ -57,12 +112,7 @@
             <br>
             <br>
 
-            <label></label>
-            <label for="signup"><RouterLink id="signup" to="/signup">sign up</RouterLink></label>
-
-            <br>
-
-            <input type="submit" value="login" @click.stop.prevent="login()">
+            <input type="submit" value="sign up" @click.stop.prevent="signup()">
 
         </form>
 
@@ -70,12 +120,25 @@
 </template>
 
 <style>
+    .boxForTwo{
+        display: inline-flex;
+    }
+
+    .boxOne{
+        float: left;
+        margin-right: 15px;
+    }
+
+    .boxTwo{
+        float: right;
+        margin-left: 15px;
+    }
+
     #formLogin{
         background: linear-gradient(180deg, var(--primary) 10%, var(--tertiary));
         color: var(--white);
         border-radius: 25px;
         text-align: center;
-        width: 50%;
         padding: 15px;
 
         margin: auto;
@@ -103,11 +166,5 @@
 
     #headerForm img{
         float: left;
-    }
-
-    #signup{
-        float: right;
-        font-size: 13px;
-        color: white;
     }
 </style>
