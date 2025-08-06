@@ -1,6 +1,7 @@
 <script>
     import { RouterLink } from 'vue-router';
     import { useSessionStore } from '@/stores/session';
+    import * as Api from '@/utils/apis';
     import * as Auth from '@/utils/auth.js';
 
     export default{
@@ -12,24 +13,31 @@
                 surname: '',
                 city: '',
                 favCity: '',
-                email: ''
+                email: '',
+                photo: 'default.png',
+                usernameList: []
             }
         },
         methods:{
-            async login(){
-                const data = await Auth.login(this.username, this.password);
-                if(data.userId){
-                    useSessionStore().setUser(data.userId);
+             async signup() {
+                this.getUserByUsername();
+                const data = await Api.addUser(this.username, this.password,
+                    this.name, this.surname, this.email,
+                    this.city, this.favCity);
+                if(data){
+                    alert('Utente aggiunto');
                     this.$router.push('/');
                 } else {
-                    if (data.message === 'User not registered') {
-                        alert('User not registered');
-                    } else if (data.message === 'Invalid username or password') {
-                        alert('Invalid password');
-                    } else {
-                        alert('Login failed');
-                    }
+                    console.log(data);
+                    alert('Errore');
                 }
+            },
+            getUserByUsername() {
+                this.usernameList.forEach(user => {
+                    if(user.name === this.name){
+                        this.username = user.username;
+                    }
+                });
             }
         }
     }
