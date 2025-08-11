@@ -3,6 +3,11 @@ const getAdmin = async() => {
     return await response.json();
 }
 
+const getHolidayPackages = async() => {
+    const response = await fetch('api/holiday_package/');
+    return await response.json();
+}
+
 const addUser = async(username, password, name, surname, email, city, favcity) => {
     const response = await fetch('api/users/', {
         method: 'POST',
@@ -14,4 +19,4 @@ const addUser = async(username, password, name, surname, email, city, favcity) =
     return await response.json();
 }
 
-export {addUser, getAdmin};
+export {addUser, getHolidayPackages, getAdmin};

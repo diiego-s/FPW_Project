@@ -27,13 +27,14 @@
 <template>
     <nav id="navbar">
             <ul>
-                <li><RouterLink exact-active-class="active" to = "/"><img class="icon" src="../assets/img/home.png" alt="icona home">Home</RouterLink></li>
-                <li><RouterLink exact-active-class="active" to="/about"><img class="icon" src="../assets/img/about.png" alt="icona about">About</RouterLink></li>
-                <li><RouterLink exact-active-class="active" to="/contacts"><img class="icon" src="../assets/img/contacts.png" alt="icona contacts">Contatti</RouterLink></li>
-                <li><RouterLink exact-active-class="active" to="/who"><img class="icon" src="../assets/img/who.png" alt="icona who">Chi siamo</RouterLink></li>
-                <li v-show="!checkUser()"><RouterLink exact-active-class="active" to="/login"><img class="icon" src="../assets/img/login.png" alt="icona login">Login</RouterLink></li>
-                <li v-show="checkUser()"><RouterLink exact-active-class="active" to="/newPackage"><img class="icon" src="../assets/img/newPackage.png" alt="icona newPackage">Nuova Pacchetto</RouterLink></li>
-                <li v-show="checkUser()"><RouterLink exact-active-class="active" to="/profile"><img class="icon" src="../assets/img/profile.png" alt="icona profile">Profilo</RouterLink></li>
+                <li><RouterLink exact-active-class="active" to = "/"><img class="icon" src="../assets/img/icon/home.png" alt="icona home">Home</RouterLink></li>
+                <li><RouterLink exact-active-class="active" to="/about"><img class="icon" src="../assets/img/icon/about.png" alt="icona about">About</RouterLink></li>
+                <li><RouterLink exact-active-class="active" to="/contacts"><img class="icon" src="../assets/img/icon/contacts.png" alt="icona contacts">Contatti</RouterLink></li>
+                <li><RouterLink exact-active-class="active" to="/who"><img class="icon" src="../assets/img/icon/who.png" alt="icona who">Chi siamo</RouterLink></li>
+                <li><RouterLink exaxt-active-claass="active" to="/holidayPackage"><img class="icon" src="../assets/img/icon/globe.png" alt="icona holidayPackage">Pacchetti Viaggio</RouterLink></li>
+                <li v-show="!checkUser()"><RouterLink exact-active-class="active" to="/login"><img class="icon" src="../assets/img/icon/login.png" alt="icona login">Login</RouterLink></li>
+                <li v-show="checkUser()"><RouterLink exact-active-class="active" to="/newPackage"><img class="icon" src="../assets/img/icon/newPackage.png" alt="icona newPackage">Nuovo Pacchetto</RouterLink></li>
+                <li v-show="checkUser()"><RouterLink exact-active-class="active" to="/profile"><img class="icon" src="../assets/img/icon/profile.png" alt="icona profile">Profilo</RouterLink></li>
             </ul>
         </nav>
 </template>
@@ -47,6 +48,7 @@
         margin-right: 10px;
         text-align: center;
     }
+
     nav li{
         list-style-type: none;
         display: inline-block;

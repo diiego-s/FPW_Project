@@ -18,7 +18,7 @@ app.use(session({
     cookie: {maxAge: 300000, secure: false}
 }));
 
-app.use('/holiday_packages', hpRoutes);
+app.use('/holiday_package', hpRoutes);
 app.use('/admin', adminRoutes);
 app.use('/sessions', sessionRoutes);
 app.use('/users', usersRoutes);

@@ -20,7 +20,7 @@
         },
         methods: {
             getUrlImage() {
-                return new URL(`../assets/img/${this.photo}`, import.meta.url);
+                return new URL(`../assets/img/admin/${this.photo}`, import.meta.url);
             }
         }
     }
@@ -50,6 +50,10 @@
             display: block;
         }
     }    
+
+    #admincard img{
+        border-radius: 25px;
+    }
 
 
 </style>

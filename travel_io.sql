@@ -5,7 +5,7 @@
 -- Dumped from database version 14.17
 -- Dumped by pg_dump version 17.0
 
--- Started on 2025-08-04 22:21:54 CEST
+-- Started on 2025-08-11 15:27:47 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -43,7 +43,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 215 (class 1259 OID 16607)
+-- TOC entry 209 (class 1259 OID 16664)
 -- Name: admin; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -59,7 +59,7 @@ CREATE TABLE public.admin (
 ALTER TABLE public.admin OWNER TO postgres;
 
 --
--- TOC entry 214 (class 1259 OID 16606)
+-- TOC entry 210 (class 1259 OID 16667)
 -- Name: admin_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -76,7 +76,7 @@ ALTER SEQUENCE public.admin_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 3718 (class 0 OID 0)
--- Dependencies: 214
+-- Dependencies: 210
 -- Name: admin_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -84,7 +84,7 @@ ALTER SEQUENCE public.admin_id_seq OWNED BY public.admin.id;
 
 
 --
--- TOC entry 209 (class 1259 OID 16572)
+-- TOC entry 211 (class 1259 OID 16668)
 -- Name: holiday_packages; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -92,7 +92,7 @@ CREATE TABLE public.holiday_packages (
     id integer NOT NULL,
     destination character varying(25),
     price double precision,
-    departure timestamp without time zone,
+    departure date,
     info character varying(200),
     days integer,
     photo character varying(200)
@@ -102,7 +102,7 @@ CREATE TABLE public.holiday_packages (
 ALTER TABLE public.holiday_packages OWNER TO postgres;
 
 --
--- TOC entry 210 (class 1259 OID 16575)
+-- TOC entry 212 (class 1259 OID 16671)
 -- Name: holiday_packages_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -119,7 +119,7 @@ ALTER SEQUENCE public.holiday_packages_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 3719 (class 0 OID 0)
--- Dependencies: 210
+-- Dependencies: 212
 -- Name: holiday_packages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -127,7 +127,7 @@ ALTER SEQUENCE public.holiday_packages_id_seq OWNED BY public.holiday_packages.i
 
 
 --
--- TOC entry 211 (class 1259 OID 16576)
+-- TOC entry 213 (class 1259 OID 16672)
 -- Name: reviews; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -136,7 +136,7 @@ CREATE TABLE public.reviews (
     title character varying(25),
     comment character varying(200),
     stars integer,
-    data timestamp without time zone,
+    data date,
     user_id character varying(20),
     holiday_id integer
 );
@@ -145,7 +145,7 @@ CREATE TABLE public.reviews (
 ALTER TABLE public.reviews OWNER TO postgres;
 
 --
--- TOC entry 212 (class 1259 OID 16579)
+-- TOC entry 214 (class 1259 OID 16675)
 -- Name: reviews_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -162,7 +162,7 @@ ALTER SEQUENCE public.reviews_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 3720 (class 0 OID 0)
--- Dependencies: 212
+-- Dependencies: 214
 -- Name: reviews_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -170,7 +170,7 @@ ALTER SEQUENCE public.reviews_id_seq OWNED BY public.reviews.id;
 
 
 --
--- TOC entry 213 (class 1259 OID 16580)
+-- TOC entry 215 (class 1259 OID 16676)
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -189,7 +189,7 @@ CREATE TABLE public.users (
 ALTER TABLE public.users OWNER TO postgres;
 
 --
--- TOC entry 3553 (class 2604 OID 16610)
+-- TOC entry 3551 (class 2604 OID 16679)
 -- Name: admin id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -197,7 +197,7 @@ ALTER TABLE ONLY public.admin ALTER COLUMN id SET DEFAULT nextval('public.admin_
 
 
 --
--- TOC entry 3551 (class 2604 OID 16583)
+-- TOC entry 3552 (class 2604 OID 16680)
 -- Name: holiday_packages id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -205,7 +205,7 @@ ALTER TABLE ONLY public.holiday_packages ALTER COLUMN id SET DEFAULT nextval('pu
 
 
 --
--- TOC entry 3552 (class 2604 OID 16584)
+-- TOC entry 3553 (class 2604 OID 16681)
 -- Name: reviews id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -213,8 +213,8 @@ ALTER TABLE ONLY public.reviews ALTER COLUMN id SET DEFAULT nextval('public.revi
 
 
 --
--- TOC entry 3710 (class 0 OID 16607)
--- Dependencies: 215
+-- TOC entry 3704 (class 0 OID 16664)
+-- Dependencies: 209
 -- Data for Name: admin; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -227,38 +227,38 @@ COPY public.admin (id, name, surname, description, photo) FROM stdin;
 
 
 --
--- TOC entry 3704 (class 0 OID 16572)
--- Dependencies: 209
+-- TOC entry 3706 (class 0 OID 16668)
+-- Dependencies: 211
 -- Data for Name: holiday_packages; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.holiday_packages (id, destination, price, departure, info, days, photo) FROM stdin;
-1	New York City	1499	2025-09-15 00:00:00	Scopri la città che non dorme mai con questo pacchetto di 5 giorni	5	NewYork.png
-2	Roma	899.99	2022-10-02 00:00:00	Passeggia tra le meraviglie storiche della capitale italiana	7	Roma.png
-3	Tokyo	1340.5	2024-11-10 00:00:00	Vivi l’atmosfera cosmopolita tra grattacieli e templi moderni	15	Tokyo.png
-5	Sydney	1190.75	2026-01-05 00:00:00	Goditi il sole, le spiagge dorate e i ritmi rilassati dell’oceano	10	sidney.png
-4	Città del Messico	980	2025-12-01 00:00:00	Esplora il cuore coloniale dell’America Latina tra cultura e colori	13	mc.png
+1	New York City	1499	2025-09-15	Metropoli vivace e cosmopolita, famosa per grattacieli iconici, Times Square, Central Park e una scena culturale e artistica che la rende la “città che non dorme mai”	5	nyc.png
+2	Roma	899.99	2022-10-02	Capitale d’Italia, ricca di storia e arte, con il Colosseo, il Vaticano e la Fontana di Trevi. Unisce passato e presente in un’atmosfera unica	7	rome.png
+3	Tokyo	1340.5	2024-11-10	Capitale del Giappone che fonde tradizione e modernità, tra templi antichi, grattacieli futuristici, cucina rinomata e cultura pop vivace	15	tokyo.png
+5	Sydney	1190.75	2026-01-05	Città australiana famosa per l’Opera House, il Sydney Harbour Bridge e le sue splendide spiagge, unendo natura, cultura e vita urbana	10	sydney.png
+4	Città del Messico	980	2025-12-01	Cuore coloniale dell’America Latina, unisce storia azteca e coloniale a musei di fama mondiale, mercati vivaci e una ricca cultura artistica piena di colori e tradizioni	13	mexcity.png
 \.
 
 
 --
--- TOC entry 3706 (class 0 OID 16576)
--- Dependencies: 211
+-- TOC entry 3708 (class 0 OID 16672)
+-- Dependencies: 213
 -- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.reviews (id, title, comment, stars, data, user_id, holiday_id) FROM stdin;
-1	New York da sogno	Vacanza indimenticabile a New York! Tutto perfetto.	5	2025-08-01 00:00:00	diiegoserra	1
-2	Roma intensa	Roma è stupenda, ma il pacchetto includeva troppe visite guidate.	4	2025-08-02 00:00:00	_giuliacannata	2
-3	Tokyo indimenticabile	Esperienza a Tokyo davvero ben organizzata e ricca di sorprese.	5	2025-08-03 00:00:00	micheleechillotti	3
-4	Sydney lontana	Sydney bella, ma il volo lunghissimo ha rovinato un po’ il mood.	3	2025-08-03 00:00:00	matte.manai	5
-5	Servizio eccellente	Buon servizio e assistenza clienti molto efficiente.	4	2025-08-04 00:00:00	diiegoserra	4
+1	New York da sogno	Vacanza indimenticabile a New York! Tutto perfetto.	5	2025-08-01	diiegoserra	1
+2	Roma intensa	Roma è stupenda, ma il pacchetto includeva troppe visite guidate.	4	2025-08-02	_giuliacannata	2
+3	Tokyo indimenticabile	Esperienza a Tokyo davvero ben organizzata e ricca di sorprese.	5	2025-08-03	micheleechillotti	3
+4	Sydney lontana	Sydney bella, ma il volo lunghissimo ha rovinato un po’ il mood.	3	2025-08-03	matte.manai	5
+5	Servizio eccellente	Buon servizio e assistenza clienti molto efficiente.	4	2025-08-04	diiegoserra	4
 \.
 
 
 --
--- TOC entry 3708 (class 0 OID 16580)
--- Dependencies: 213
+-- TOC entry 3710 (class 0 OID 16676)
+-- Dependencies: 215
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -272,7 +272,7 @@ matte.manai	oettam	Matteo	Manai	matteo.manai@falliti.com	Quartu S.E.	Barcellona	
 
 --
 -- TOC entry 3721 (class 0 OID 0)
--- Dependencies: 214
+-- Dependencies: 210
 -- Name: admin_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -281,7 +281,7 @@ SELECT pg_catalog.setval('public.admin_id_seq', 4, true);
 
 --
 -- TOC entry 3722 (class 0 OID 0)
--- Dependencies: 210
+-- Dependencies: 212
 -- Name: holiday_packages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -290,7 +290,7 @@ SELECT pg_catalog.setval('public.holiday_packages_id_seq', 10, true);
 
 --
 -- TOC entry 3723 (class 0 OID 0)
--- Dependencies: 212
+-- Dependencies: 214
 -- Name: reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -298,7 +298,7 @@ SELECT pg_catalog.setval('public.reviews_id_seq', 5, true);
 
 
 --
--- TOC entry 3561 (class 2606 OID 16612)
+-- TOC entry 3555 (class 2606 OID 16683)
 -- Name: admin admin_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -307,7 +307,7 @@ ALTER TABLE ONLY public.admin
 
 
 --
--- TOC entry 3555 (class 2606 OID 16586)
+-- TOC entry 3557 (class 2606 OID 16685)
 -- Name: holiday_packages holiday_packages_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -316,7 +316,7 @@ ALTER TABLE ONLY public.holiday_packages
 
 
 --
--- TOC entry 3557 (class 2606 OID 16588)
+-- TOC entry 3559 (class 2606 OID 16687)
 -- Name: reviews reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -325,7 +325,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- TOC entry 3559 (class 2606 OID 16590)
+-- TOC entry 3561 (class 2606 OID 16689)
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -334,7 +334,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 3562 (class 2606 OID 16591)
+-- TOC entry 3562 (class 2606 OID 16690)
 -- Name: reviews reviews_holiday_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -343,7 +343,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- TOC entry 3563 (class 2606 OID 16596)
+-- TOC entry 3563 (class 2606 OID 16695)
 -- Name: reviews reviews_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -352,7 +352,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- TOC entry 3564 (class 2606 OID 16601)
+-- TOC entry 3564 (class 2606 OID 16700)
 -- Name: reviews reviews_user_id_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -370,7 +370,7 @@ REVOKE USAGE ON SCHEMA public FROM PUBLIC;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2025-08-04 22:21:54 CEST
+-- Completed on 2025-08-11 15:27:48 CEST
 
 --
 -- PostgreSQL database dump complete

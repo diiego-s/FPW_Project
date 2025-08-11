@@ -1,9 +1,12 @@
 const pool = require('../../db');
 const queries = require('./hp_queries.js');
 
-const getHolidayPackageList = (req, res) => {
-    pool.query(queries.getHolidayPackageList, (error, result) => {
+const getHolidayPackages = (req, res) => {
+    pool.query(queries.getHolidayPackages, (error, result) => {
         if(error) throw error;
+        result.rows.forEach(row => {
+            row.departure = row.departure.toISOString().slice(0, 10);
+        });
         res.status(200).json(result.rows);
     })
 }
@@ -16,8 +19,7 @@ const getHolidayPackageById = (req, res) => {
     })
 }
 
-
 module.exports = {
-    getHolidayPackageList,
+    getHolidayPackages,
     getHolidayPackageById
 }
