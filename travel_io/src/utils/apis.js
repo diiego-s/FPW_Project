@@ -8,6 +8,11 @@ const getHolidayPackages = async() => {
     return await response.json();
 }
 
+const getUserInfo = async(username) => {
+    const response = await fetch(`api/users/${username}`);
+    return await response.json();
+}
+
 const addUser = async(username, password, name, surname, email, city, favcity) => {
     const response = await fetch('api/users/', {
         method: 'POST',
@@ -19,4 +24,4 @@ const addUser = async(username, password, name, surname, email, city, favcity) =
     return await response.json();
 }
 
-export {addUser, getHolidayPackages, getAdmin};
+export {addUser, getHolidayPackages, getAdmin, getUserInfo};

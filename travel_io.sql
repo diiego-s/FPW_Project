@@ -5,7 +5,7 @@
 -- Dumped from database version 14.17
 -- Dumped by pg_dump version 17.0
 
--- Started on 2025-08-11 15:27:47 CEST
+-- Started on 2025-08-13 14:20:36 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -30,7 +30,7 @@ CREATE SCHEMA public;
 ALTER SCHEMA public OWNER TO postgres;
 
 --
--- TOC entry 3716 (class 0 OID 0)
+-- TOC entry 3703 (class 0 OID 0)
 -- Dependencies: 5
 -- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
 --
@@ -75,7 +75,7 @@ CREATE SEQUENCE public.admin_id_seq
 ALTER SEQUENCE public.admin_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3718 (class 0 OID 0)
+-- TOC entry 3705 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: admin_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -118,7 +118,7 @@ CREATE SEQUENCE public.holiday_packages_id_seq
 ALTER SEQUENCE public.holiday_packages_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3719 (class 0 OID 0)
+-- TOC entry 3706 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: holiday_packages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -127,50 +127,7 @@ ALTER SEQUENCE public.holiday_packages_id_seq OWNED BY public.holiday_packages.i
 
 
 --
--- TOC entry 213 (class 1259 OID 16672)
--- Name: reviews; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.reviews (
-    id integer NOT NULL,
-    title character varying(25),
-    comment character varying(200),
-    stars integer,
-    data date,
-    user_id character varying(20),
-    holiday_id integer
-);
-
-
-ALTER TABLE public.reviews OWNER TO postgres;
-
---
--- TOC entry 214 (class 1259 OID 16675)
--- Name: reviews_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.reviews_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.reviews_id_seq OWNER TO postgres;
-
---
--- TOC entry 3720 (class 0 OID 0)
--- Dependencies: 214
--- Name: reviews_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.reviews_id_seq OWNED BY public.reviews.id;
-
-
---
--- TOC entry 215 (class 1259 OID 16676)
+-- TOC entry 213 (class 1259 OID 16676)
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -182,14 +139,15 @@ CREATE TABLE public.users (
     email character varying(50),
     city character varying(25),
     fav_city character varying(25),
-    photo character varying(200)
+    photo character varying(200),
+    age integer
 );
 
 
 ALTER TABLE public.users OWNER TO postgres;
 
 --
--- TOC entry 3551 (class 2604 OID 16679)
+-- TOC entry 3546 (class 2604 OID 16679)
 -- Name: admin id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -197,7 +155,7 @@ ALTER TABLE ONLY public.admin ALTER COLUMN id SET DEFAULT nextval('public.admin_
 
 
 --
--- TOC entry 3552 (class 2604 OID 16680)
+-- TOC entry 3547 (class 2604 OID 16680)
 -- Name: holiday_packages id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -205,15 +163,7 @@ ALTER TABLE ONLY public.holiday_packages ALTER COLUMN id SET DEFAULT nextval('pu
 
 
 --
--- TOC entry 3553 (class 2604 OID 16681)
--- Name: reviews id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.reviews ALTER COLUMN id SET DEFAULT nextval('public.reviews_id_seq'::regclass);
-
-
---
--- TOC entry 3704 (class 0 OID 16664)
+-- TOC entry 3693 (class 0 OID 16664)
 -- Dependencies: 209
 -- Data for Name: admin; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -227,7 +177,7 @@ COPY public.admin (id, name, surname, description, photo) FROM stdin;
 
 
 --
--- TOC entry 3706 (class 0 OID 16668)
+-- TOC entry 3695 (class 0 OID 16668)
 -- Dependencies: 211
 -- Data for Name: holiday_packages; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -242,36 +192,21 @@ COPY public.holiday_packages (id, destination, price, departure, info, days, pho
 
 
 --
--- TOC entry 3708 (class 0 OID 16672)
+-- TOC entry 3697 (class 0 OID 16676)
 -- Dependencies: 213
--- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.reviews (id, title, comment, stars, data, user_id, holiday_id) FROM stdin;
-1	New York da sogno	Vacanza indimenticabile a New York! Tutto perfetto.	5	2025-08-01	diiegoserra	1
-2	Roma intensa	Roma è stupenda, ma il pacchetto includeva troppe visite guidate.	4	2025-08-02	_giuliacannata	2
-3	Tokyo indimenticabile	Esperienza a Tokyo davvero ben organizzata e ricca di sorprese.	5	2025-08-03	micheleechillotti	3
-4	Sydney lontana	Sydney bella, ma il volo lunghissimo ha rovinato un po’ il mood.	3	2025-08-03	matte.manai	5
-5	Servizio eccellente	Buon servizio e assistenza clienti molto efficiente.	4	2025-08-04	diiegoserra	4
-\.
-
-
---
--- TOC entry 3710 (class 0 OID 16676)
--- Dependencies: 215
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.users (username, password, name, surname, email, city, fav_city, photo) FROM stdin;
-diiegoserra	ogeid	Diego	Serra	diego.serra@falliti.com	Cagliari	New York City	diego.png
-micheleechillotti	elehcim	Michele	Chillotti	michele.chillotti@falliti.com	Sinnai	Tokyo	michele.png
-_giuliacannata	ailuig	Giulia	Cannata	giulia.cannata@falliti.com	Quartu S.E.	Verona	giulia.png
-matte.manai	oettam	Matteo	Manai	matteo.manai@falliti.com	Quartu S.E.	Barcellona	matteo.png
+COPY public.users (username, password, name, surname, email, city, fav_city, photo, age) FROM stdin;
+serra	66505	Diego	Serra	d.serra126@studenti.unica.it	Cagliari	New York City	diego.png	20
+chillotti	66441	Michele	Chillotti	m.chillotti22@studenti.unica.it	Sinnai	Tokyo	michele.png	21
+cannata	66464	Giulia	Cannata	g.cannata4@studenti.unica.it	Quartu S.E.	Verona	giulia.png	20
+manai	66438	Matteo	Manai	m.manai22@studenti.unica.it	Quartu S.E.	Barcellona	matteo.png	20
 \.
 
 
 --
--- TOC entry 3721 (class 0 OID 0)
+-- TOC entry 3707 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: admin_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -280,7 +215,7 @@ SELECT pg_catalog.setval('public.admin_id_seq', 4, true);
 
 
 --
--- TOC entry 3722 (class 0 OID 0)
+-- TOC entry 3708 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: holiday_packages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -289,16 +224,7 @@ SELECT pg_catalog.setval('public.holiday_packages_id_seq', 10, true);
 
 
 --
--- TOC entry 3723 (class 0 OID 0)
--- Dependencies: 214
--- Name: reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.reviews_id_seq', 5, true);
-
-
---
--- TOC entry 3555 (class 2606 OID 16683)
+-- TOC entry 3549 (class 2606 OID 16683)
 -- Name: admin admin_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -307,7 +233,7 @@ ALTER TABLE ONLY public.admin
 
 
 --
--- TOC entry 3557 (class 2606 OID 16685)
+-- TOC entry 3551 (class 2606 OID 16685)
 -- Name: holiday_packages holiday_packages_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -316,16 +242,7 @@ ALTER TABLE ONLY public.holiday_packages
 
 
 --
--- TOC entry 3559 (class 2606 OID 16687)
--- Name: reviews reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.reviews
-    ADD CONSTRAINT reviews_pkey PRIMARY KEY (id);
-
-
---
--- TOC entry 3561 (class 2606 OID 16689)
+-- TOC entry 3553 (class 2606 OID 16689)
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -334,34 +251,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 3562 (class 2606 OID 16690)
--- Name: reviews reviews_holiday_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.reviews
-    ADD CONSTRAINT reviews_holiday_id_fkey FOREIGN KEY (holiday_id) REFERENCES public.holiday_packages(id);
-
-
---
--- TOC entry 3563 (class 2606 OID 16695)
--- Name: reviews reviews_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.reviews
-    ADD CONSTRAINT reviews_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(username);
-
-
---
--- TOC entry 3564 (class 2606 OID 16700)
--- Name: reviews reviews_user_id_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.reviews
-    ADD CONSTRAINT reviews_user_id_fkey1 FOREIGN KEY (user_id) REFERENCES public.users(username);
-
-
---
--- TOC entry 3717 (class 0 OID 0)
+-- TOC entry 3704 (class 0 OID 0)
 -- Dependencies: 5
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -370,7 +260,7 @@ REVOKE USAGE ON SCHEMA public FROM PUBLIC;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2025-08-11 15:27:48 CEST
+-- Completed on 2025-08-13 14:20:36 CEST
 
 --
 -- PostgreSQL database dump complete

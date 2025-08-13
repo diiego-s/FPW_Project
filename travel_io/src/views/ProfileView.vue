@@ -2,11 +2,13 @@
 <script>
     import { useSessionStore } from '@/stores/session';
     import * as Auth from '@/utils/auth.js';
+    import * as Api from '@/utils/apis';
 
     export default {
         data(){
             return{
                 username: '',
+                userInfo: [],
                 sessionStore: useSessionStore(),
             }
         },
@@ -16,9 +18,16 @@
                 this.sessionStore.setUser(null);
                 this.$router.push('/');
             },
-            getUser(){
+            async getUser(){
                 this.username = this.sessionStore.getUser();
-            }
+                if(this.username){
+                    const data = await Api.getUserInfo(this.username);
+                    this.userInfo = data[0];
+                }
+            },
+            getUrlImage() {
+                return new URL(`../assets/img/admin/${this.userInfo.photo}`, import.meta.url);
+            },
         },
         mounted(){
             this.getUser();
@@ -28,7 +37,15 @@
 
 <template>
     <div class="col-2" id="profileBox">
-        <h1>Benvenuto {{ username }}</h1>
+        <h1 v-if="userInfo.name">Benvenuto {{ userInfo.name }} {{ userInfo.surname }}</h1>
+        <div>
+            <img :src="getUrlImage()" alt="foto profilo" width="200">
+            <p>username: {{ userInfo.username }}</p>
+            <p>email: {{ userInfo.email }}</p>
+            <p>citta provenienza: {{ userInfo.city }}</p>
+            <p>citta dei sogni: {{ userInfo.fav_city }}</p>
+            <p>anni: {{ userInfo.age }}</p>
+        </div>
         <input @click="logout()" type="submit" value="logout"></input>
     </div>
 </template>
