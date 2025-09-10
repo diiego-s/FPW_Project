@@ -37,25 +37,43 @@
 
 <template>
     <div class="col-2" id="profileBox">
-        <h1 v-if="userInfo.name">Benvenuto {{ userInfo.name }} {{ userInfo.surname }}</h1>
-        <div>
-            <img :src="getUrlImage()" alt="foto profilo" width="200">
-            <p>username: {{ userInfo.username }}</p>
-            <p>email: {{ userInfo.email }}</p>
-            <p>citta provenienza: {{ userInfo.city }}</p>
-            <p>citta dei sogni: {{ userInfo.fav_city }}</p>
-            <p>anni: {{ userInfo.age }}</p>
+        <h1 v-if="userInfo.name">Benvenuto/a {{ userInfo.name }} {{ userInfo.surname }}</h1>
+        <div class="boxForTwo">
+            <div class="boxOne">
+                <img :src="getUrlImage()" alt="foto profilo" width="200">
+            </div>
+            <div class="boxTwo">
+                <br>
+                <h4>username: </h4><span>{{ userInfo.username }}</span><br><br>
+                <h4>email: </h4><span>{{ userInfo.email }}</span><br><br>
+                <h4>citta provenienza: </h4><span>{{ userInfo.city }}</span><br><br>
+                <h4>citta dei sogni: </h4><span>{{ userInfo.fav_city }}</span><br><br>
+                <h4>anni: </h4><span>{{ userInfo.age }}</span>
+            </div>
         </div>
+        <br>
         <input @click="logout()" type="submit" value="logout"></input>
     </div>
 </template>
 
 <style>
+    h4{
+        color: var(--tertiary);
+        display: inline;
+    }
+
+
+    #profileBox{
+        margin-bottom: 15px;
+    }
+
+
     #profileBox input[type="submit"] {
         background: var(--primary);
         color: var(--white);
         font-weight: bold;
         cursor: pointer;
+        font-size: 15px;
 
         padding: 10px;
         border: none;
