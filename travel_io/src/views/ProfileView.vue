@@ -40,7 +40,7 @@
         <h1 v-if="userInfo.name">Benvenuto/a {{ userInfo.name }} {{ userInfo.surname }}</h1>
         <div class="boxForTwo">
             <div class="boxOne">
-                <img :src="getUrlImage()" alt="foto profilo" width="200">
+                <img id="profilePic" :src="getUrlImage()" alt="foto profilo" width="200">
             </div>
             <div class="boxTwo">
                 <br>
@@ -62,6 +62,9 @@
         display: inline;
     }
 
+    #profilePic{
+        border-radius: 25px;
+    }
 
     #profileBox{
         margin-bottom: 15px;
