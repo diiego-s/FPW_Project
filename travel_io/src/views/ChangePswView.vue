@@ -1,4 +1,5 @@
 <script>
+    import { RouterLink } from 'vue-router';
     import { useSessionStore } from '@/stores/session';
     import * as Auth from '@/utils/auth.js';
 
@@ -54,44 +55,53 @@
 </script>
 
 <template>
-    <div>
 
-        <form id="formChangePsw" action="changePsw" method="POST">
-                <div id="headerForm">
-                    <img src="../assets/img/onlylogo.png" alt="logo di travel_io senza scritta" width="50">
+    <div>
+        
+        <div id="boxArrow">
+            <br>
+            <RouterLink id="backwards" to="/profile"><img src="../assets/img/icon/arrow.png" alt="icona freccia sinistra">profilo</RouterLink>
+        </div>
+    
+        <div>
+            <form id="formChangePsw" action="changePsw" method="POST">
+                    <div id="headerForm">
+                        <img src="../assets/img/onlylogo.png" alt="logo di travel_io senza scritta" width="50">
+                        <br>
+                        <br>
+                        <h1 style="color: var(--white);">Cambia password</h1>
+                    </div>
+        
+                    <br>
+        
+                    <label for="oldPassword">password attuale</label>
+                    <br>
+                    <input type="password" name="oldPassword" v-model="oldPassword" />
+        
                     <br>
                     <br>
-                    <h1 style="color: var(--white);">Cambia password</h1>
-                </div>
-    
-                <br>
-    
-                <label for="oldPassword">password attuale</label>
-                <br>
-                <input type="password" name="oldPassword" v-model="oldPassword" />
-    
-                <br>
-                <br>
-    
-                <label for="newPassword1">nuova password</label>
-                <br>
-                <input type="password" name="newPassword1" v-model="newPassword1">
-    
-                <br>
-                <br>
-                
-                <label for="newPassword2">nuova password</label>
-                <br>
-                <input type="password" name="newPassword2" v-model="newPassword2">
-    
-                <br>
-                <br>
-                <br>
-    
-                <input type="submit" value="cambia password" @click.stop.prevent="changePsw()">
-    
-            </form>
+        
+                    <label for="newPassword1">nuova password</label>
+                    <br>
+                    <input type="password" name="newPassword1" v-model="newPassword1">
+        
+                    <br>
+                    <br>
+                    
+                    <label for="newPassword2">nuova password</label>
+                    <br>
+                    <input type="password" name="newPassword2" v-model="newPassword2">
+        
+                    <br>
+                    <br>
+                    <br>
+        
+                    <input type="submit" value="cambia password" @click.stop.prevent="changePsw()">
+        
+                </form>
+        </div>
     </div>
+
 
 </template>
 <style>
@@ -106,6 +116,19 @@
         margin: auto;
         margin-bottom: 26px;
         margin-top: 5px;
+    }
+
+    #backwards:visited{
+        color: var(--black);
+    }
+
+    #boxArrow{
+        margin-left: 15px;
+        display: inline;
+    }
+
+    #boxArrow img{
+        vertical-align: text-bottom;
     }
 
     #formChangePsw input[type="submit"] {

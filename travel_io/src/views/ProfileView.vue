@@ -54,6 +54,7 @@
         </div>
         <br>
         <input @click="logout()" type="submit" value="logout"></input>
+        
         <p><RouterLink id="changepsw" to="/changePassword">cambia password</RouterLink></p>
     </div>
 </template>
@@ -67,9 +68,9 @@
     
     #changepsw{
         font-size: 16px;
-        margin-left: 500px;
         text-decoration: underline;
         color: var(--black);
+        float: right;
     }
 
     #profilePic{
