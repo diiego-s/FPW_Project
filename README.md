@@ -40,7 +40,7 @@ Il progetto FPW_Project ha lo scopo di mettere in pratica le conoscenze acquisit
 2. **Installa le dipendenze**
    - Per il backend:
      ```bash
-     cd Serever
+     cd Server
      npm install
      ```
    - Per il frontend (se necessario):
