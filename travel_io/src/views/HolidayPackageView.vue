@@ -1,5 +1,6 @@
 <script>
     import HolidayPackage from '../components/HolidayPackage.vue'
+    import {useSessionStore} from '@/stores/session'
     import * as Api from '@/utils/apis.js';
 
     export default {
@@ -8,16 +9,26 @@
         },
         data(){
             return {
-                holidayPackages: []
+                holidayPackages: [],
+                sessionStore: useSessionStore()
             }
         },
         methods: {
             async getHolidayPackages(){
                 const data = await Api.getHolidayPackages();
                 this.holidayPackages = data;
+            },
+            checkUser(){
+                if(this.sessionStore.getUser() == null){
+                    return false;
+                } else {
+                    return true;
+                }
             }
         },
         mounted(){
+            if(!this.checkUser())
+                this.$router.push('/login');
             this.getHolidayPackages();
         }
     }

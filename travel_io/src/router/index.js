@@ -3,8 +3,6 @@ import { useSessionStore } from '@/stores/session'
 import * as Auth from '@/utils/auth'
 
 import HomeView from '@/views/HomeView.vue'
-import AboutView from '@/views/AboutView.vue'
-import ContactsView from '@/views/ContactsView.vue'
 import NewPackageView from '@/views/NewPackageView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import WhoView from '@/views/WhoView.vue'
@@ -20,16 +18,6 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: AboutView,
-    },
-    {
-      path: '/contacts',
-      name: 'contacts',
-      component: ContactsView,
     },
     {
       path: '/login',

@@ -38,7 +38,7 @@
 
     <br>
     <div id="holidayPackage">
-        <img :src="getUrlImage()" alt="Foto della destinazione" width="500">
+        <img :src="getUrlImage()" alt="Foto della destinazione" width="400">
         <div>
             <h1>{{ destination }}</h1>
             <p> {{ info }} <br><br></p>
