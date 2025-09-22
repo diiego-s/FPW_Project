@@ -5,7 +5,7 @@
 -- Dumped from database version 14.17
 -- Dumped by pg_dump version 17.0
 
--- Started on 2025-08-13 14:20:36 CEST
+-- Started on 2025-09-22 21:06:46 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -24,19 +24,10 @@ SET row_security = off;
 -- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
-CREATE SCHEMA public;
+-- *not* creating schema, since initdb creates it
 
 
 ALTER SCHEMA public OWNER TO postgres;
-
---
--- TOC entry 3703 (class 0 OID 0)
--- Dependencies: 5
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
---
-
-COMMENT ON SCHEMA public IS 'standard public schema';
-
 
 SET default_tablespace = '';
 
@@ -75,7 +66,7 @@ CREATE SEQUENCE public.admin_id_seq
 ALTER SEQUENCE public.admin_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3705 (class 0 OID 0)
+-- TOC entry 3704 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: admin_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -118,7 +109,7 @@ CREATE SEQUENCE public.holiday_packages_id_seq
 ALTER SEQUENCE public.holiday_packages_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3706 (class 0 OID 0)
+-- TOC entry 3705 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: holiday_packages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -171,8 +162,8 @@ ALTER TABLE ONLY public.holiday_packages ALTER COLUMN id SET DEFAULT nextval('pu
 COPY public.admin (id, name, surname, description, photo) FROM stdin;
 1	Diego	Serra	Appassionato Apple da sempre: se non è della mela, non lo guarda nemmeno. Il suo sogno? Fare colazione con Tim Cook.	diego.png
 2	Giulia	Cannata	Esperta di make-up e outfit impeccabili. Riesce a coordinare rossetto e CSS con una precisione disarmante.	giulia.png
-3	Michele	Chillotti	Lazza nel cuore, cuffie sempre in testa. Se non lo trovi al computer, è perché sta imparando a memoria ogni barra del suo idolo.	chillo.png
-4	Matteo	Manai	Ama i motori più del caffè. Se sente un rombo in lontananza, lascia anche una riunione Zoom pur di guardare che macchina è.	matte.png
+3	Michele	Chillotti	Lazza nel cuore, cuffie sempre in testa. Se non lo trovi al computer, è perché sta imparando a memoria ogni barra del suo idolo.	michele.png
+4	Matteo	Manai	Ama i motori più del caffè. Se sente un rombo in lontananza, lascia anche una riunione Zoom pur di guardare che macchina è.	matteo.png
 \.
 
 
@@ -206,7 +197,7 @@ manai	66438	Matteo	Manai	m.manai22@studenti.unica.it	Quartu S.E.	Barcellona	matt
 
 
 --
--- TOC entry 3707 (class 0 OID 0)
+-- TOC entry 3706 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: admin_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -215,7 +206,7 @@ SELECT pg_catalog.setval('public.admin_id_seq', 4, true);
 
 
 --
--- TOC entry 3708 (class 0 OID 0)
+-- TOC entry 3707 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: holiday_packages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -251,7 +242,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 3704 (class 0 OID 0)
+-- TOC entry 3703 (class 0 OID 0)
 -- Dependencies: 5
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -260,7 +251,7 @@ REVOKE USAGE ON SCHEMA public FROM PUBLIC;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2025-08-13 14:20:36 CEST
+-- Completed on 2025-09-22 21:06:46 CEST
 
 --
 -- PostgreSQL database dump complete
