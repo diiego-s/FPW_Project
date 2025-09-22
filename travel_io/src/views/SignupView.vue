@@ -128,20 +128,6 @@
 </template>
 
 <style>
-    .boxForTwo{
-        display: inline-flex;
-    }
-
-    .boxOne{
-        float: left;
-        margin-right: 15px;
-    }
-
-    .boxTwo{
-        float: right;
-        margin-left: 15px;
-    }
-
     #formLogin{
         background: linear-gradient(180deg, var(--primary) 10%, var(--tertiary));
         color: var(--white);

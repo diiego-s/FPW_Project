@@ -1,5 +1,6 @@
 
 <script>
+    import { RouterLink } from 'vue-router';
     import { useSessionStore } from '@/stores/session';
     import * as Auth from '@/utils/auth.js';
     import * as Api from '@/utils/apis';
@@ -36,7 +37,7 @@
 </script>
 
 <template>
-    <div class="col-2" id="profileBox">
+    <div id="profileBox">
         <h1 v-if="userInfo.name">Benvenuto/a {{ userInfo.name }} {{ userInfo.surname }}</h1>
         <div class="boxForTwo">
             <div class="boxOne">
@@ -53,6 +54,7 @@
         </div>
         <br>
         <input @click="logout()" type="submit" value="logout"></input>
+        <p><RouterLink id="changepsw" to="/changePassword">cambia password</RouterLink></p>
     </div>
 </template>
 
@@ -60,6 +62,14 @@
     h4{
         color: var(--tertiary);
         display: inline;
+    }
+
+    
+    #changepsw{
+        font-size: 16px;
+        margin-left: 500px;
+        text-decoration: underline;
+        color: var(--black);
     }
 
     #profilePic{

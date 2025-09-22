@@ -79,5 +79,6 @@
 
     ul{
         margin-top: 0px;
+        padding-left: 0px;
     }
 </style>

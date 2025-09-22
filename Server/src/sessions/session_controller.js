@@ -38,8 +38,35 @@ const isLogged = (req, res) => {
     }
 }
 
+const changePsw = (req, res) => {
+    const { username, oldPassword, newPassword } = req.body;
+    pool.query(queries.usernameExist, [username], (error, result) => {
+        if (error) throw error;
+        if (result.rows.length > 0) {
+            pool.query(queries.login, [username, oldPassword], (error, results) => {
+                if (error) throw error;
+                if (results.rows.length > 0) {
+                    pool.query(queries.changePsw, [username, oldPassword, newPassword], (error, updateResult) => {
+                        if (error) throw error;
+                        if (updateResult.rowCount > 0) {
+                            res.status(200).json({message: 'Password updated successfully'});
+                        } else {
+                            res.status(500).json({ message: 'Unexpected error while updating password' });
+                        }
+                    })
+                } else {
+                    res.status(401).json({ message: 'Invalid current password' });
+                }
+            })
+        } else {
+            res.status(401).json({ message: 'User not found' });
+        }
+    });
+};
+
 module.exports = {
     login,
     logout,
-    isLogged
+    isLogged,
+    changePsw
 }
