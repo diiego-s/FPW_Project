@@ -1,9 +1,5 @@
 @import './base.css';
 
-body{
-    background: linear-gradient(to bottom, var(--white)35%, var(--secondary)100%);
-}
-
 header{
     text-align: center;
     margin-bottom: 0px;

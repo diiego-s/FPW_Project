@@ -14,6 +14,8 @@
 
 body{
     font-family: Roboto;
+    background: linear-gradient(to bottom, var(--white)35%, var(--secondary)100%);
+
 }
 
 *{
@@ -61,6 +63,7 @@ body{
 
     header{
         background: radial-gradient(circle, var(--white)5%, var(--primary)35%, var(--tertiary));
+        
     }
 }
 

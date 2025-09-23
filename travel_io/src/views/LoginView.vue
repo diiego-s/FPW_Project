@@ -32,7 +32,7 @@
 </script>
 
 <template>
-    <div class="col-2">
+    <div>
         
         <form id="formLogin" action="login" method="POST">
             <div id="headerForm">

@@ -25,7 +25,7 @@
 </script>
 
 <template>
-    <div class="col-2">
+    <div>
         
         <form id="formHolidayPackage" action="newHolidayPackage">
             <div id="headerForm">
