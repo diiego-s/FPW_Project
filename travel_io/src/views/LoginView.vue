@@ -58,7 +58,8 @@
             <br>
             <br>
 
-            <label></label>
+            <label>Non hai un account? Registrati</label>
+            <br>
             <label for="signup"><RouterLink id="signup" to="/signup">signup</RouterLink></label>
 
             <br>
@@ -107,8 +108,8 @@
     }
 
     #signup{
-        float: right;
-        font-size: 13px;
+        font-size: 15px;
+        text-decoration: underline;
         color: white;
     }
 </style>

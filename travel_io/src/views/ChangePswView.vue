@@ -153,10 +153,4 @@
     #headerForm img{
         float: left;
     }
-
-    #signup{
-        float: right;
-        font-size: 13px;
-        color: white;
-    }
 </style>

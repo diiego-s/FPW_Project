@@ -37,6 +37,7 @@
         padding-right: 25px;
         padding-top: 10px;
         padding-bottom: 10px;
+        width: 90%;
     }
 
     #infobar a{

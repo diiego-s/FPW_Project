@@ -19,24 +19,26 @@
 </template>
 
 <style>
+
+    
+
     #boxAd img{
         border-radius: 25px;
+        margin-bottom: 5px;
         margin-top: 5px;
-        margin-bottom: 10px;
-        text-align: center;
+        width: 90%;
     }
 
     @media only screen and (min-width: 768px){
         #boxAd img{
             height: 745px;
-            width:374px;
         }
     }
 
     @media only screen and (max-width: 768px){
         #boxAd img{
             height: 600px;
-            width: 100%;
+            
         }
     }
 </style>
