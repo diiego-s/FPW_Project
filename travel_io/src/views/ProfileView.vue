@@ -43,8 +43,8 @@
             <div class="boxOne">
                 <img id="profilePic" :src="getUrlImage()" alt="foto profilo" width="200">
             </div>
-            <div class="boxTwo">
-                <br>
+            <br>
+            <div class="boxTwo" id="infoProfile">
                 <h4>username: </h4><span>{{ userInfo.username }}</span><br><br>
                 <h4>email: </h4><span>{{ userInfo.email }}</span><br><br>
                 <h4>citta provenienza: </h4><span>{{ userInfo.city }}</span><br><br>
@@ -65,6 +65,11 @@
         display: inline;
     }
 
+    #infoProfile{
+        background-color: rgba(128, 128, 128, 0.144);
+        border-radius: 25px;
+        padding: 15px;
+    }
     
     #changepsw{
         font-size: 16px;

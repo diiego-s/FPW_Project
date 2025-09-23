@@ -40,8 +40,9 @@
                 } else if(data.message === 'Unexpected error while updating password') {
                     alert('Unexpected error');
                 } else if(data.message === 'Password updated successfully') {
+                    alert('Password changed correctly')
                     this.$router.push('/profile');
-    }
+                }
             },
             getUser(){
                 this.username = this.sessionStore.getUser();

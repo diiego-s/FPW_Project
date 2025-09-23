@@ -7,4 +7,7 @@ const router = Router();
 router.get('/', controller.getHolidayPackages);
 router.get('/:id', controller.getHolidayPackageById);
 
+//POST
+router.post('/', controller.addHolidayPackage);
+
 module.exports = router;

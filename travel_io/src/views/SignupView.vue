@@ -1,8 +1,5 @@
 <script>
-    import { RouterLink } from 'vue-router';
-    import { useSessionStore } from '@/stores/session';
     import * as Api from '@/utils/apis';
-    import * as Auth from '@/utils/auth.js';
 
     export default{
         data(){
@@ -14,7 +11,7 @@
                 city: '',
                 favCity: '',
                 email: '',
-                photo: 'default.png',
+                age: 16,
                 usernameList: []
             }
         },
@@ -23,13 +20,12 @@
                 this.getUserByUsername();
                 const data = await Api.addUser(this.username, this.password,
                     this.name, this.surname, this.email,
-                    this.city, this.favCity);
+                    this.city, this.favCity, this.age);
                 if(data){
-                    alert('Utente aggiunto');
+                    alert('user added');
                     this.$router.push('/');
                 } else {
-                    console.log(data);
-                    alert('Errore');
+                    alert('error');
                 }
             },
             getUserByUsername() {
@@ -44,14 +40,19 @@
 </script>
 
 <template>
-    <div class="col-2">
+    <div>
+
+        <div id="boxArrow">
+            <br>
+            <RouterLink id="backwards" to="/login"><img src="../assets/img/icon/arrow.png" alt="icona freccia sinistra">login</RouterLink>
+        </div>
         
-        <form id="formLogin" action="signup" method="POST">
+        <form id="formSignUp" action="signup" method="POST">
             <div id="headerForm">
                 <img src="../assets/img/onlylogo.png" alt="logo di travel_io senza scritta" width="50">
                 <br>
                 <br>
-                <h1 style="color: var(--white);">sign up</h1>
+                <h1 style="color: var(--white);">signup</h1>
             </div>
 
             <br>
@@ -106,6 +107,11 @@
             <br>
             <br>
 
+            <label for="age">et&agrave;</label>
+            <br>
+            <input type="number" name="age" min="16" max="99" v-model="age" /><br>
+            <br>
+
             <label for="username">username</label>
             <br>
             <input type="text" name="username" v-model="username" />
@@ -128,7 +134,7 @@
 </template>
 
 <style>
-    #formLogin{
+    #formSignUp{
         background: linear-gradient(180deg, var(--primary) 10%, var(--tertiary));
         color: var(--white);
         border-radius: 25px;
@@ -138,10 +144,10 @@
 
         margin: auto;
         margin-bottom: 26px;
-        margin-top: 5px;
+        margin-top: 10%;
     }
 
-    #formLogin input[type="submit"] {
+    #formSignUp input[type="submit"] {
         background: rgba(255, 255, 255, 0.489);
         color: var(--white);
         font-weight: bold;
@@ -150,11 +156,11 @@
         padding: 10px;
         border: none;
         border-radius: 5px;
-        margin-top: 20px;
+        margin-top: 15%;
         width: 68%;
     }
 
-    #formLogin input[type="submit"]:hover {
+    #formSignUp input[type="submit"]:hover {
         background: rgba(255, 255, 255, 0.343);
         color: var(--white);
     }

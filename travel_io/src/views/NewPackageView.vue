@@ -1,3 +1,29 @@
+<script>
+    import * as Api from '@/utils/apis';
+    export default{
+        data(){
+            return{
+                destination: '',
+                price: '',
+                departure: '',
+                info: '',
+                days: '',
+            }
+        },
+        methods:{
+            async addHolidayPackage(){
+                const data = await Api.addHolidayPackage(this.destination, this.price, this.departure, this.info, this.days);
+                if(data){
+                    alert('Holiday Package added');
+                    this.$router.push('/holidayPackage');
+                } else {
+                    alert('error');
+                }
+            }
+        }
+    }
+</script>
+
 <template>
     <div class="col-2">
         
@@ -12,36 +38,36 @@
             <br>
 
             <label for="destination">Destinazione: </label>
-            <input type="text" name="destination" />
+            <input type="text" name="destination" v-model="destination"/>
 
             <br>
             <br>
 
             <label for="price">Costo: </label>
-            <input type="number" name="price" min="1" max="10000">
+            <input type="number" name="price" min="1" max="10000" v-model="price">
 
             <br>
             <br>
 
             <label for="departure">Data di partenza: </label>
-            <input type="date" name="departure" >
+            <input type="date" name="departure" v-model="departure">
 
             <br>
             <br>
 
             <label for="info">Info: </label>
-            <textarea name="info"></textarea>
+            <textarea name="info" v-model="info"></textarea>
 
             <br>
             <br>
 
             <label for="days">Giorni di soggiorno: </label>
-            <input type="number" name="days" min="1" max="31">
+            <input type="number" name="days" min="1" max="31" v-model="days">
 
             <br>
             <br>
 
-            <input type="submit" value="invia">
+            <input type="submit" value="aggiungi" @click.stop.prevent="addHolidayPackage()">
 
         </form>
 
@@ -59,7 +85,7 @@
 
         margin: auto;
         margin-bottom: 26px;
-        margin-top: 5px;
+        margin-top: 15%;
     }
 
     #formHolidayPackage input[type="submit"] {

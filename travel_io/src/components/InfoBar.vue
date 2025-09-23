@@ -13,7 +13,6 @@
             <ul>
                 <li>⚡ Interfaccia semplice e intuitiva</li>
                 <li>🌍 Ampia scelta di destinazioni e attività</li>
-                <li>💡 Filtri intelligenti per personalizzare ogni ricerca</li>
                 <li>🔒 Prenotazioni sicure e gestione trasparente</li>
                 <li>📱 Accessibile da desktop, tablet e smartphone</li>
             </ul>
@@ -21,7 +20,7 @@
             <h3>I nostri valori</h3>
             <p>In travel_io crediamo che ogni viaggio debba essere un’esperienza positiva, sia per chi parte sia per chi accoglie. Per questo ci impegniamo a promuovere un turismo consapevole, sostenibile e rispettoso delle culture locali. Collaboriamo solo con partner affidabili, selezionati per qualità e serietà.</p>
     
-            <p>Hai bisogno di aiuto? Visita la nostra pagina contatti o scrivici: il nostro team è sempre pronto a supportarti, dalla prenotazione alla partenza.</p>   
+            <p>Hai bisogno di aiuto? Scrivici: il nostro team è sempre pronto a supportarti, dalla prenotazione alla partenza.</p>   
         </article>
           </div>
         </div>
@@ -39,7 +38,12 @@
         padding-top: 10px;
         padding-bottom: 10px;
     }
+
     #infobar a{
+        color: var(--white);
+    }
+
+    #infobar h2{
         color: var(--white);
     }
 </style>

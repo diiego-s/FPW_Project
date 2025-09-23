@@ -3,6 +3,7 @@
     --secondary:#FBF7F0;
     --tertiary:#1F93AC;
     --white:#ffffff;
+    --grey: #8080805c;
     --black:#000000;
 }
 
@@ -46,6 +47,16 @@ body{
     #navbar {
         position: sticky;
         top: 0px;
+    }
+
+    #navbar.logged{
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    #navbar.guest{
+        margin-left: 30%;
+        margin-right: 30%;
     }
 
     header{

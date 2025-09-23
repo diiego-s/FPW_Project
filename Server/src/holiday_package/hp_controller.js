@@ -19,7 +19,16 @@ const getHolidayPackageById = (req, res) => {
     })
 }
 
+const addHolidayPackage = (req, res) => {
+    const {destination, price, departure, info, days} = req.body;
+    pool.query(queries.addHolidayPackage, [destination, price, departure, info, days], (error, result) => {
+        if (error) throw error;
+        res.status(201).json({message: 'HolidayPackage added correctly'});
+    });
+}
+
 module.exports = {
     getHolidayPackages,
-    getHolidayPackageById
+    getHolidayPackageById,
+    addHolidayPackage
 }

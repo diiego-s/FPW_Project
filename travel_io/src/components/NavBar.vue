@@ -25,7 +25,7 @@
 </script>
 
 <template>
-    <nav id="navbar">
+    <nav id="navbar" :class="{logged: checkUser(), guest: !checkUser()}">
             <ul>
                 <li><RouterLink to = "/"><img class="icon" src="../assets/img/icon/home.png" alt="icona home">Home</RouterLink></li>
                 <li><RouterLink to="/who"><img class="icon" src="../assets/img/icon/who.png" alt="icona who">Chi siamo</RouterLink></li>
@@ -42,6 +42,7 @@
         color: var(--tertiary);
         font-weight: bold;
     }
+
     .icon{
         margin-right: 10px;
         text-align: center;

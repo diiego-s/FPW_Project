@@ -39,7 +39,7 @@
                 <img src="../assets/img/onlylogo.png" alt="logo di travel_io senza scritta" width="50">
                 <br>
                 <br>
-                <h1 style="color: var(--white);">log in</h1>
+                <h1 style="color: var(--white);">login</h1>
             </div>
 
             <br>
@@ -59,7 +59,7 @@
             <br>
 
             <label></label>
-            <label for="signup"><RouterLink id="signup" to="/signup">sign up</RouterLink></label>
+            <label for="signup"><RouterLink id="signup" to="/signup">signup</RouterLink></label>
 
             <br>
 
@@ -76,12 +76,12 @@
         color: var(--white);
         border-radius: 25px;
         text-align: center;
-        width: 50%;
+        width: 60%;
         padding: 15px;
 
         margin: auto;
         margin-bottom: 26px;
-        margin-top: 5px;
+        margin-top: 15%;
     }
 
     #formLogin input[type="submit"] {

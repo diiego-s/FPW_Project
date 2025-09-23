@@ -28,8 +28,8 @@
 
     @media only screen and (min-width: 768px){
         #boxAd img{
-            height: 873px;
-            width:310px;
+            height: 745px;
+            width:374px;
         }
     }
 
