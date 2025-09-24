@@ -44,7 +44,7 @@
 
         <div id="boxArrow">
             <br>
-            <RouterLink id="backwards" to="/login"><img src="../assets/img/icon/arrow.png" alt="icona freccia sinistra">login</RouterLink>
+            <RouterLink id="backwards" to="/login"><img src="../assets/img/icon/arrowBlack.png" alt="icona freccia sinistra">login</RouterLink>
         </div>
         
         <form id="formSignUp" action="signup" method="POST">
@@ -168,4 +168,18 @@
     #headerForm img{
         float: left;
     }
+
+    #backwards:visited{
+        color: var(--black);
+    }
+
+    #boxArrow{
+        margin-left: 15px;
+        display: inline;
+    }
+
+    #boxArrow img{
+        vertical-align: text-bottom;
+    }
+
 </style>

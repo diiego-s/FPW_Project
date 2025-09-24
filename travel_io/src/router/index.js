@@ -9,7 +9,6 @@ import WhoView from '@/views/WhoView.vue'
 import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SignupView.vue'
 import HolidayPackageView from '@/views/HolidayPackageView.vue'
-import ChangePswView from '@/views/ChangePswView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -48,11 +47,6 @@ const router = createRouter({
       path:'/holidayPackage',
       name: 'holidayPackage',
       component: HolidayPackageView,
-    },
-    {
-      path:'/changePassword',
-      name:"changePassword",
-      component: ChangePswView,
     }
   ],
 });

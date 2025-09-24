@@ -7,7 +7,11 @@
         data(){
             return{
                 username: '',
-                password: ''
+                password: '',
+                maxCharUser: 20,
+                minCharUser: 1,
+                maxCharPsw: 20,
+                minCharPsw: 1,
             }
         },
         methods:{
@@ -25,6 +29,16 @@
                     } else {
                         alert('Login failed');
                     }
+                }
+            },
+            checkNumCharUser() {
+                if(this.username.length > this.maxCharUser){
+                    this.username = this.username.substring(0, this.maxCharUser);
+                }
+            },
+            checkNumCharPsw() {
+                if(this.password.length > this.maxCharPsw){
+                    this.password = this.password.substring(0, this.maxCharPsw);
                 }
             }
         }
@@ -46,14 +60,14 @@
 
             <label for="username">username</label>
             <br>
-            <input type="text" name="username" v-model="username" />
+            <input type="text" name="username" v-model="username" @input="checkNumCharUser()" /><span class="counter">{{ username.length }}/20</span>
 
             <br>
             <br>
 
             <label for="password">password</label>
             <br>
-            <input type="password" name="password" v-model="password">
+            <input type="password" name="password" v-model="password" @input="checkNumCharPsw()" /><span class="counter">{{ password.length }}/20</span>
 
             <br>
             <br>
@@ -72,6 +86,11 @@
 </template>
 
 <style>
+
+    .counter{
+        margin-left: 5px;
+    }
+
     #formLogin{
         background: linear-gradient(180deg, var(--primary) 10%, var(--tertiary));
         color: var(--white);
