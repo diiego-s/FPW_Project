@@ -82,10 +82,14 @@
                 if(this.newPassword2.length > this.maxCharNewPsw2){
                     this.newPassword2 = this.newPassword2.substring(0, this.maxCharNewPsw2);
                 }
+            },
+            allowButton(){
+                return this.oldPassword === '' || this.newPassword1 === '' || this.newPassword2 === '';
             }
         },
         mounted(){
             this.getUser();
+            this.allowButton();
         }
     }
 </script>
@@ -109,8 +113,8 @@
             </div>
             <br>
     
-            <p><a id="changepsw" v-if="!showForm" @click="showForm = !showForm">cambia password</a></p>
-            <div v-if="showForm">
+            <a id="changepsw" v-if="!showForm" @click="showForm = !showForm">cambia password</a>
+            <div v-else>
                 <form id="formChangePsw" action="changePsw" method="POST">
                     <div id="headerForm">  
                         <table>
@@ -143,7 +147,7 @@
         
                     <br>
             
-                    <input type="submit" value="cambia password" @click.stop.prevent="changePsw()" @click="showForm = !showForm">
+                    <input type="submit" value="cambia password" @click.stop.prevent="changePsw()" @click="showForm = !showForm" :disabled="allowButton()">
                 </form>
             </div>
     
@@ -191,6 +195,10 @@
     #profileBox input[type="submit"]:hover {
         background: rgba(16, 112, 190, 0.343);
         color: var(--white);
+    }
+
+    #profileBox input[type="submit"]:disabled {
+        cursor: not-allowed;
     }
 
     #formChangePsw{
