@@ -20,24 +20,24 @@
 
 <style>
 
-    
+    #boxAd{
+        margin-top: 5px;
+    }
 
     #boxAd img{
+        width: 100%;
         border-radius: 25px;
-        margin-bottom: 5px;
-        margin-top: 5px;
-        width: 90%;
     }
 
     @media only screen and (min-width: 768px){
         #boxAd img{
-            height: 745px;
+            height: 682px;
         }
     }
 
     @media only screen and (max-width: 768px){
         #boxAd img{
-            height: 600px;
+            height: 700px;
             
         }
     }

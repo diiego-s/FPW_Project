@@ -4,10 +4,10 @@
         data(){
             return{
                 destination: '',
-                price: '',
-                departure: '',
+                price: 1,
+                departure: new Date().toISOString().slice(0, 10),
                 info: '',
-                days: '',
+                days: 1,
             }
         },
         methods:{

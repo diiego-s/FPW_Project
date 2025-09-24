@@ -22,9 +22,9 @@ body{
     box-sizing: border-box;
 }
 
-.col-1{width: 25%}
-.col-2{width: 50%}
-.col-3{width: 25%}
+.col-1{width: 25%;}
+.col-2{width: 50%;}
+.col-3{width: 25%;}
 
 .boxForTwo{
     display: inline-flex;
@@ -63,7 +63,6 @@ body{
 
     header{
         background: radial-gradient(circle, var(--white)5%, var(--primary)35%, var(--tertiary));
-        
     }
 }
 
