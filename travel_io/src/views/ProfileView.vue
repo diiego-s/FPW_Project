@@ -16,11 +16,8 @@
                 newPassword1: '',
                 newPassword2: '',
                 maxCharOldPsw: 20,
-                minCharOldPsw: 1,
                 maxCharNewPsw1: 20,
-                minCharNewPsw1: 1,
                 maxCharNewPsw2: 20,
-                minCharNewPsw2: 1,
             }
         },
         methods: {
