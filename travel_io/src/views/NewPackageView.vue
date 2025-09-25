@@ -14,7 +14,7 @@
             async addHolidayPackage(){
                 const data = await Api.addHolidayPackage(this.destination, this.price, this.departure, this.info, this.days);
                 if(data){
-                    alert('Holiday Package added');
+                    alert('Holiday Package added correctly');
                     this.$router.push('/holidayPackage');
                 } else {
                     alert('error');

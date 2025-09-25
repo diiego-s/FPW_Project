@@ -40,7 +40,13 @@
                 if(this.password.length > this.maxCharPsw){
                     this.password = this.password.substring(0, this.maxCharPsw);
                 }
+            },
+            allowButton(){
+                return this.username === '';
             }
+        },
+        mounted(){
+            this.allowButton();
         }
     }
 </script>
@@ -78,7 +84,7 @@
 
             <br>
 
-            <input type="submit" value="login" @click.stop.prevent="login()">
+            <input type="submit" value="login" :disabled="allowButton()" @click.stop.prevent="login()">
 
         </form>
 
@@ -120,6 +126,10 @@
     #formLogin input[type="submit"]:hover {
         background: rgba(255, 255, 255, 0.343);
         color: var(--white);
+    }
+
+    #formLogin input[type="submit"]:disabled{
+        cursor: not-allowed;
     }
 
     #headerForm img{
