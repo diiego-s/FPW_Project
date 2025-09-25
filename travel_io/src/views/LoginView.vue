@@ -31,6 +31,9 @@
                     }
                 }
             },
+            checkLogin(){
+                if(useSessionStore().getUser()) this.$router.push('/profile');
+            },
             checkNumCharUser() {
                 if(this.username.length > this.maxCharUser){
                     this.username = this.username.substring(0, this.maxCharUser);
@@ -46,6 +49,7 @@
             }
         },
         mounted(){
+            this.checkLogin();
             this.allowButton();
         }
     }
