@@ -2,16 +2,25 @@
     import { RouterLink } from 'vue-router';
     import { useSessionStore } from '@/stores/session';
     import * as Auth from '@/utils/auth.js';
+    import * as Api from '@/utils/apis';
 
     export default{
         data(){
             return{
                 username: '',
                 password: '',
+                userInfo: [],
+                sessionStore: useSessionStore(),
+                showForm: false,
+                oldPassword: '',
+                newPassword: '',
+                newPassword1: '',
+                newPassword2: '',
+                maxCharOldPsw: 20,
+                maxCharNewPsw1: 20,
+                maxCharNewPsw2: 20,
                 maxCharUser: 20,
-                minCharUser: 1,
                 maxCharPsw: 20,
-                minCharPsw: 1,
             }
         },
         methods:{
@@ -31,9 +40,6 @@
                     }
                 }
             },
-            checkLogin(){
-                if(useSessionStore().getUser()) this.$router.push('/profile');
-            },
             checkNumCharUser() {
                 if(this.username.length > this.maxCharUser){
                     this.username = this.username.substring(0, this.maxCharUser);
@@ -44,82 +50,216 @@
                     this.password = this.password.substring(0, this.maxCharPsw);
                 }
             },
-            allowButton(){
+            allowButtonLog(){
                 return this.username === '';
+            },
+            checkLogin(){
+                if (useSessionStore().getUser()) return true;
+                else return false;
+            },
+            async logout(){
+                await Auth.logout();
+                this.sessionStore.setUser(null);
+                this.$router.push('/');
+            },
+            async getUser(){
+                this.username = this.sessionStore.getUser();
+                if(this.username){
+                    const data = await Api.getUserInfo(this.username);
+                    this.userInfo = data[0];
+                }
+            },
+            getUrlImage() {
+                return new URL(`../assets/img/admin/${this.userInfo.photo}`, import.meta.url);
+            },
+            checkPassword(){
+                if(this.newPassword1 === this.newPassword2){
+                    if(this.newPassword1 !== this.oldPassword){
+                        this.newPassword = this.newPassword1;
+                        return true;
+                    }
+                    else{
+                        alert('Current password and new password cannot be the same');
+                        return false;
+                    }
+                } else {
+                    alert('the new passwords arent the same');
+                    return false;
+                }
+            },
+            async changePsw(){
+                if (!this.checkPassword()) return;
+                const data = await Auth.changePsw(this.username, this.oldPassword, this.newPassword);
+                if(data.message === 'User not found') {
+                    alert('User not found');
+                } else if(data.message === 'Invalid current password') {
+                    alert('Invalid current password');
+                } else if(data.message === 'Unexpected error while updating password') {
+                    alert('Unexpected error');
+                } else if(data.message === 'Password updated successfully') {
+                    alert('Password changed correctly')
+                    this.$router.push('/login');
+                }
+            },
+            checkNumCharOldPsw() {
+                if(this.oldPassword.length > this.maxCharOldPsw){
+                    this.oldPassword = this.oldPassword.substring(0, this.maxCharOldPsw);
+                }
+            },
+            checkNumCharNewPsw1() {
+                if(this.newPassword1.length > this.maxCharNewPsw1){
+                    this.newPassword1 = this.newPassword1.substring(0, this.maxCharNewPsw1);
+                }
+            },
+            checkNumCharNewPsw2() {
+                if(this.newPassword2.length > this.maxCharNewPsw2){
+                    this.newPassword2 = this.newPassword2.substring(0, this.maxCharNewPsw2);
+                }
+            },
+            allowButtonChange(){
+                return this.oldPassword === '' || this.newPassword1 === '' || this.newPassword2 === '';
             }
         },
         mounted(){
-            this.checkLogin();
-            this.allowButton();
+            this.getUser();
+            this.allowButtonChange();
+            this.allowButtonLog();
         }
     }
 </script>
 
 <template>
     <div>
+
+        <div v-if="checkLogin()">
+            <div id="profileBox">
+                <h1 v-if="userInfo.name">Benvenuto/a {{ userInfo.name }} {{ userInfo.surname }}</h1>
+                <div class="boxForTwo">
+                    <div class="boxOne">
+                        <img id="profilePic" :src="getUrlImage()" alt="foto profilo" width="200">
+                    </div>
+                    <br>
+                    <div class="boxTwo" id="infoProfile">
+                        <h4>username: </h4><span>{{ userInfo.username }}</span><br><br>
+                        <h4>email: </h4><span>{{ userInfo.email }}</span><br><br>
+                        <h4>citta provenienza: </h4><span>{{ userInfo.city }}</span><br><br>
+                        <h4>citta dei sogni: </h4><span>{{ userInfo.fav_city }}</span><br><br>
+                        <h4>anni: </h4><span>{{ userInfo.age }}</span>
+                    </div>
+                </div>
+                <br><br><br>
         
-        <form id="formLogin" action="login" method="POST">
-            <div id="headerForm">
-                <img src="../assets/img/onlylogo.png" alt="logo di travel_io senza scritta" width="50">
-                <br>
-                <br>
-                <h1 style="color: var(--white);">login</h1>
+                <a id="changepsw" v-if="!showForm" @click="showForm = !showForm">cambia password</a>
+                <div v-else>
+                    <form class="form-box" action="changePsw" method="POST">
+                        <div id="headerForm">  
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td><a @click="showForm = !showForm"><img src="../assets/img/icon/arrowWhite.png" alt="icona freccia sinistra" /></a></td>
+                                        <td><img src="../assets/img/onlylogo.png" alt="logo di travel_io senza scritta" width="50"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>   
+                        </div>
+            
+                        <label for="oldPassword">password attuale</label>
+                        <br>
+                        <input type="password" name="oldPassword" v-model="oldPassword" @input="checkNumCharOldPsw()" /><span class="counter">{{ oldPassword.length }}/20</span>
+            
+                        <br>
+                        <br>
+            
+                        <label for="newPassword1">nuova password</label>
+                        <br>
+                        <input type="password" name="newPassword1" v-model="newPassword1" @input="checkNumCharNewPsw1()"><span class="counter">{{ newPassword1.length }}/20</span>
+            
+                        <br>
+                        <br>
+                        
+                        <label for="newPassword2">nuova password</label>
+                        <br>
+                        <input type="password" name="newPassword2" v-model="newPassword2" @input="checkNumCharNewPsw2()"><span class="counter">{{ newPassword2.length }}/20</span>
+            
+                        <br>
+                
+                        <input type="submit" value="cambia password" @click.stop.prevent="changePsw()" @click="showForm = !showForm" :disabled="allowButtonChange()">
+                    </form>
+                </div>
+    
+                <input class="btn-submit" @click="logout()" type="submit" value="logout"></input>
             </div>
+        </div>
 
-            <br>
+        <div v-else>
+            <form class="form-box" action="login" method="POST">
+                <div id="headerForm">
+                    <img src="../assets/img/onlylogo.png" alt="logo di travel_io senza scritta" width="50">
+                    <br>
+                    <br>
+                    <h1 style="color: var(--white);">login</h1>
+                </div>
 
-            <label for="username">username</label>
-            <br>
-            <input type="text" name="username" v-model="username" @input="checkNumCharUser()" /><span class="counter">{{ username.length }}/20</span>
+                <br>
 
-            <br>
-            <br>
+                <label for="username">username</label>
+                <br>
+                <input type="text" name="username" v-model="username" @input="checkNumCharUser()" /><span class="counter">{{ username.length }}/20</span>
 
-            <label for="password">password</label>
-            <br>
-            <input type="password" name="password" v-model="password" @input="checkNumCharPsw()" /><span class="counter">{{ password.length }}/20</span>
+                <br>
+                <br>
 
-            <br>
-            <br>
+                <label for="password">password</label>
+                <br>
+                <input type="password" name="password" v-model="password" @input="checkNumCharPsw()" /><span class="counter">{{ password.length }}/20</span>
 
-            <label>Non hai un account? Registrati</label>
-            <br>
-            <label for="signup"><RouterLink id="signup" to="/signup">signup</RouterLink></label>
+                <br>
+                <br>
 
-            <br>
+                <label>Non hai un account? Registrati</label>
+                <br>
+                <label for="signup"><RouterLink id="signup" to="/signup">signup</RouterLink></label>
 
-            <input type="submit" value="login" :disabled="allowButton()" @click.stop.prevent="login()">
+                <br>
 
-        </form>
+                <input class="btn-submit" type="submit" value="login" :disabled="allowButtonLog()" @click.stop.prevent="login()">
+
+            </form>
+        </div>
 
     </div>
 </template>
 
 <style>
-
-    .counter{
+    .counter {
         margin-left: 5px;
     }
 
-    #formLogin{
+    .form-box {
         background: linear-gradient(180deg, var(--primary) 10%, var(--tertiary));
         color: var(--white);
         border-radius: 25px;
         text-align: center;
         width: 60%;
         padding: 15px;
-
         margin: auto;
+        margin-top: 5px;
         margin-bottom: 26px;
+    }
+
+    #formLogin {
         margin-top: 15%;
     }
 
-    #formLogin input[type="submit"] {
+    #formChangePsw {
+        margin-top: 5px;
+    }
+
+    .btn-submit {
         background: rgba(255, 255, 255, 0.489);
         color: var(--white);
         font-weight: bold;
         cursor: pointer;
-
         padding: 10px;
         border: none;
         border-radius: 5px;
@@ -127,22 +267,66 @@
         width: 68%;
     }
 
-    #formLogin input[type="submit"]:hover {
+    .btn-submit:hover {
         background: rgba(255, 255, 255, 0.343);
         color: var(--white);
     }
 
-    #formLogin input[type="submit"]:disabled{
+    .btn-submit:disabled {
         cursor: not-allowed;
     }
 
-    #headerForm img{
+    #headerForm img {
         float: left;
+        display: inline;
     }
 
-    #signup{
+    #signup {
         font-size: 15px;
         text-decoration: underline;
-        color: white;
+        color: var(--white);
+    }
+
+    #changepsw {
+        font-size: 16px;
+        text-decoration: underline;
+        color: var(--black);
+        float: right;
+    }
+
+    #infoProfile {
+        background-color: rgba(128, 128, 128, 0.144);
+        border-radius: 25px;
+        padding: 15px;
+    }
+
+    #profilePic {
+        border-radius: 25px;
+    }
+
+    #profileBox {
+        margin-bottom: 15px;
+    }
+
+    #profileBox input[type="submit"] {
+        background: var(--primary);
+        color: var(--white);
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 15px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        margin-top: 20px;
+        width: fit-content;
+    }
+
+    #profileBox input[type="submit"]:hover {
+        background: rgba(16, 112, 190, 0.343);
+        color: var(--white);
+    }
+
+    #profileBox input[type="submit"]:disabled {
+        cursor: not-allowed;
     }
 </style>

@@ -32,7 +32,7 @@
                 <li><RouterLink to="/holidayPackage"><img class="icon" src="../assets/img/icon/globe.png" alt="icona holidayPackage">Pacchetti Viaggio</RouterLink></li>
                 <li v-show="!checkUser()"><RouterLink to="/login"><img class="icon" src="../assets/img/icon/login.png" alt="icona login">Login</RouterLink></li>
                 <li v-show="checkUser()"><RouterLink to="/newPackage"><img class="icon" src="../assets/img/icon/newPackage.png" alt="icona newPackage">Nuovo Pacchetto</RouterLink></li>
-                <li v-show="checkUser()"><RouterLink to="/profile"><img class="icon" src="../assets/img/icon/profile.png" alt="icona profile">Profilo</RouterLink></li>
+                <li v-show="checkUser()"><RouterLink to="/login"><img class="icon" src="../assets/img/icon/profile.png" alt="icona profile">Profilo</RouterLink></li>
             </ul>
         </nav>
 </template>
