@@ -96,7 +96,7 @@
             <br>
 
             <label for="price">Costo: </label>
-            <input type="number" name="price" min="1" max="10000" v-model="price" :style="priceStyle"> <span v-if="checkPrice()"> Devi inserire un prezzo compreso tra 1 e 10000 </span>
+            <input type="number" name="price" min="1" max="10000" v-model="price" :style="priceStyle"><br> <span v-if="checkPrice()">Devi inserire un prezzo compreso tra 1 e 10000 </span>
 
             <br>
             <br>

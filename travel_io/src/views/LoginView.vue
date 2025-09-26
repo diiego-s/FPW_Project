@@ -203,7 +203,7 @@
                 this.newPassword2 = '';
             },
             allowButtonSignup(){
-                return this.name === '' || this.surname === '' || this.email === '' ||this.city === '' || this.favCity === '' || this.checkAge() || this.username === '' || this.password === '' ;
+                return this.name === '' || this.surname === '' || this.email === '' ||this.city === '' || this.favCity === '' || this.checkAge() || this.username === '';
             }
         },
         mounted(){
@@ -294,7 +294,7 @@
 
                     <label for="username">username</label>
                     <br>
-                    <input type="text" name="username" v-model="username" @input="checkNumCharUser()" /><span class="counter">{{ username?.length }}/20</span>
+                    <input type="text" name="username" v-model="username" @input="checkNumCharUser()" /><span class="counter">{{username?.length }}/20</span>
 
                     <br>
                     <br>

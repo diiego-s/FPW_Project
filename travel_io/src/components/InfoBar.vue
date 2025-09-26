@@ -41,6 +41,10 @@
         height: auto;
     }
 
+    #infobar ul {
+        padding-left: 15px;
+    }
+
     #infobar a{
         color: var(--white);
     }

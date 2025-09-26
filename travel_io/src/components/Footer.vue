@@ -15,6 +15,10 @@
         color: var(--white);
     }
 
+    #footerContent ul{
+        margin-left: 15px;
+    }
+    
     #footerContent a{
         color: var(--white);
         font-size: 15px;
