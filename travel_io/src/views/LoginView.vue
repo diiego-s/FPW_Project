@@ -1,5 +1,4 @@
 <script>
-    import { RouterLink } from 'vue-router';
     import { useSessionStore } from '@/stores/session';
     import * as Auth from '@/utils/auth.js';
     import * as Api from '@/utils/apis';
@@ -29,6 +28,16 @@
                 maxCharNewPsw2: 20,
                 maxCharUser: 20,
                 maxCharPsw: 20,
+                maxCharName: 50,
+                maxCharSurname: 50,
+                maxCharEmail: 50,
+                maxCharCity: 25,
+                maxCharFavCity: 25,
+                maxAge: 99,
+                minAge: 16,
+                ageStyle: {
+                    color: 'black'
+                }
             }
         },
         methods:{
@@ -145,12 +154,63 @@
                         this.username = user.username;
                     }
                 });
+            },
+            checkNumCharName() {
+                if(this.name.length > this.maxCharName){
+                    this.name = this.name.substring(0, this.maxCharName);
+                }
+            },
+            checkNumCharSurname() {
+                if(this.surname.length > this.maxCharSurname){
+                    this.surname = this.surname.substring(0, this.maxCharSurname);
+                }
+            },
+            checkNumCharEmail() {
+                if(this.email.length > this.maxCharEmail){
+                    this.email = this.email.substring(0, this.maxCharEmail);
+                }
+            },
+            checkNumCharCity() {
+                if(this.city.length > this.maxCharCity){
+                    this.city = this.city.substring(0, this.maxCharCity);
+                }
+            },
+            checkNumCharFavCity() {
+                if(this.favCity.length > this.maxCharFavCity){
+                    this.favCity = this.favCity.substring(0, this.maxCharFavCity);
+                }
+            },
+            checkAge() {
+                if(this.age > this.maxAge || this.age < this.minAge){
+                    this.ageStyle.color = 'red';
+                    return true;
+                } else {
+                    this.ageStyle.color = 'black';
+                    return false;
+                }
+            },
+            resetForm() {
+                this.username = '';
+                this.password = '';
+                this.name = '';
+                this.surname = '';
+                this.email = '';
+                this.city = '';
+                this.favCity = '';
+                this.age = 16;
+                this.oldPassword = '';
+                this.newPassword1 = '';
+                this.newPassword2 = '';
+            },
+            allowButtonSignup(){
+                return this.name === '' || this.surname === '' || this.email === '' ||this.city === '' || this.favCity === '' || this.checkAge() || this.username === '' || this.password === '' ;
             }
         },
         mounted(){
             this.getUser();
             this.allowButtonChange();
             this.allowButtonLog();
+            this.allowButtonSignup();
         }
     }
 </script>
@@ -248,7 +308,7 @@
 
                     <label>Non hai un account? Registrati</label>
                     <br>
-                    <label for="signup"><a id="signup" @click="showFormSignup = true">signup</a></label>
+                    <label for="signup"><a id="signup" @click="showFormSignup = !showFormSignup; resetForm()">signup</a></label>
 
                     <br>
 
@@ -263,7 +323,7 @@
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td><a @click="showFormSignup = !showFormSignup"><img src="../assets/img/icon/arrowWhite.png" alt="icona freccia sinistra" /></a></td>
+                                        <td><a @click="showFormSignup = !showFormSignup; resetForm()"><img src="../assets/img/icon/arrowWhite.png" alt="icona freccia sinistra" /></a></td>
                                         <td><img src="../assets/img/onlylogo.png" alt="logo di travel_io senza scritta" width="50"/></td>
                                     </tr>
                                 </tbody>
@@ -280,7 +340,7 @@
                         <div class="boxOne">
                             <label for="name">Nome</label>
                             <br>
-                            <input type="text" name="name" v-model="name" />
+                            <input type="text" name="name" v-model="name" @input="checkNumCharName()" /><span class="counter">{{ name.length }}/50</span>
                         </div>
             
             
@@ -290,7 +350,7 @@
                         <div class="boxTwo">
                             <label for="surname">Cognome</label>
                             <br>
-                            <input type="text" name="surname" v-model="surname" />
+                            <input type="text" name="surname" v-model="surname" @input="checkNumCharSurname()" /><span class="counter">{{ surname.length }}/50</span>
                         </div>
                     </div>
 
@@ -299,7 +359,7 @@
                     
                     <label for="email">email</label>
                     <br>
-                    <input type="email" name="email" v-model="email" />
+                    <input type="email" name="email" v-model="email" @input="checkNumCharEmail()" /><span class="counter">{{ email.length }}/50</span>
 
                     <br>
                     <br>
@@ -309,7 +369,7 @@
                         <div class="boxOne">
                             <label for="city">Citta di residenza</label>
                             <br>
-                            <input type="text" name="city" v-model="city" />
+                            <input type="text" name="city" v-model="city" @input="checkNumCharCity()" /><span class="counter">{{ city.length }}/25</span>
                         </div>
             
                         <br>
@@ -318,7 +378,7 @@
                         <div class="boxTwo">
                             <label for="favCity">Citta preferita</label>
                             <br>
-                            <input type="text" name="favCity" v-model="favCity" />
+                            <input type="text" name="favCity" v-model="favCity" @input="checkNumCharFavCity()" /><span class="counter">{{ favCity.length }}/25</span>
                         </div>
                     </div>
 
@@ -328,24 +388,24 @@
 
                     <label for="age">et&agrave;</label>
                     <br>
-                    <input type="number" name="age" min="16" max="99" v-model="age" /><br>
+                    <input type="number" name="age" min="16" max="99" v-model="age" :style="ageStyle" /><br><span v-if="checkAge()"> Devi avere un et&agrave; compresa tra i 16 ed i 99 anni </span><br>
                     <br>
 
                     <label for="username">username</label>
                     <br>
-                    <input type="text" name="username" v-model="username" />
+                    <input type="text" name="username" v-model="username" @input="checkNumCharUser()" /><span class="counter">{{ username?.length }}/20</span>
 
                     <br>
                     <br>
 
                     <label for="password">password</label>
                     <br>
-                    <input type="password" name="password" v-model="password">
+                    <input type="password" name="password" v-model="password" @input="checkNumCharPsw()" /><span class="counter">{{ password.length }}/20</span>
 
                     <br>
                     <br>
 
-                    <input class="btn-submit" type="submit" value="sign up" @click.stop.prevent="signup()">
+                    <input class="btn-submit" type="submit" value="sign up" @click.stop.prevent="signup()" :disabled="allowButtonSignup()">
 
                 </form>
 
@@ -365,7 +425,7 @@
         color: var(--white);
         border-radius: 25px;
         text-align: center;
-        width: 60%;
+        width: fit-content;
         padding: 15px;
         margin: auto;
         margin-top: 5px;
