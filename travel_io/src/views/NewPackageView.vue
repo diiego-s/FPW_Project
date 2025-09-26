@@ -1,5 +1,6 @@
 <script>
     import * as Api from '@/utils/apis';
+    import { useSessionStore } from '@/stores/session';
     export default{
         data(){
             return{
@@ -19,7 +20,13 @@
                 } else {
                     alert('error');
                 }
+            },
+            checkLogin(){
+                if(!useSessionStore().getUser()) this.$router.push('/login');
             }
+        },
+        mounted(){
+            this.checkLogin();
         }
     }
 </script>

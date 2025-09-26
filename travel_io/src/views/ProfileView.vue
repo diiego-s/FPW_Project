@@ -82,9 +82,13 @@
             },
             allowButton(){
                 return this.oldPassword === '' || this.newPassword1 === '' || this.newPassword2 === '';
+            },
+            checkLogin(){
+                if(!useSessionStore().getUser()) this.$router.push('/login');
             }
         },
         mounted(){
+            this.checkLogin();
             this.getUser();
             this.allowButton();
         }
