@@ -255,27 +255,6 @@
         margin-top: 5px;
     }
 
-    .btn-submit {
-        background: rgba(255, 255, 255, 0.489);
-        color: var(--white);
-        font-weight: bold;
-        cursor: pointer;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        margin-top: 20px;
-        width: 68%;
-    }
-
-    .btn-submit:hover {
-        background: rgba(255, 255, 255, 0.343);
-        color: var(--white);
-    }
-
-    .btn-submit:disabled {
-        cursor: not-allowed;
-    }
-
     #headerForm img {
         float: left;
         display: inline;
