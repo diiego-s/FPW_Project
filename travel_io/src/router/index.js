@@ -6,7 +6,6 @@ import HomeView from '@/views/HomeView.vue'
 import NewPackageView from '@/views/NewPackageView.vue'
 import WhoView from '@/views/WhoView.vue'
 import LoginView from '@/views/LoginView.vue'
-import SignupView from '@/views/SignupView.vue'
 import HolidayPackageView from '@/views/HolidayPackageView.vue'
 
 const router = createRouter({
@@ -31,11 +30,6 @@ const router = createRouter({
       path: '/who',
       name: 'who',
       component: WhoView,
-    },
-    {
-      path: '/signup',
-      name: 'signup',
-      component: SignupView,
     },
     {
       path:'/holidayPackage',

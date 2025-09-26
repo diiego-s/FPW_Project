@@ -10,8 +10,16 @@
                 username: '',
                 password: '',
                 userInfo: [],
+                name: '',
+                surname: '',
+                city: '',
+                favCity: '',
+                email: '',
+                age: 16,
+                usernameList: [],
                 sessionStore: useSessionStore(),
-                showForm: false,
+                showFormChange: false,
+                showFormSignup: false,
                 oldPassword: '',
                 newPassword: '',
                 newPassword1: '',
@@ -118,6 +126,25 @@
             },
             allowButtonChange(){
                 return this.oldPassword === '' || this.newPassword1 === '' || this.newPassword2 === '';
+            },
+            async signup() {
+                this.getUserByUsername();
+                const data = await Api.addUser(this.username, this.password,
+                    this.name, this.surname, this.email,
+                    this.city, this.favCity, this.age);
+                if(data){
+                    alert('user added');
+                    this.$router.push('/');
+                } else {
+                    alert('error');
+                }
+            },
+            getUserByUsername() {
+                this.usernameList.forEach(user => {
+                    if(user.name === this.name){
+                        this.username = user.username;
+                    }
+                });
             }
         },
         mounted(){
@@ -149,14 +176,14 @@
                 </div>
                 <br><br><br>
         
-                <a id="changepsw" v-if="!showForm" @click="showForm = !showForm">cambia password</a>
+                <a id="changepsw" v-if="!showFormChange" @click="showFormChange = true">cambia password</a>
                 <div v-else>
                     <form class="form-box" action="changePsw" method="POST">
                         <div id="headerForm">  
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td><a @click="showForm = !showForm"><img src="../assets/img/icon/arrowWhite.png" alt="icona freccia sinistra" /></a></td>
+                                        <td><a @click="showFormChange = false"><img src="../assets/img/icon/arrowWhite.png" alt="icona freccia sinistra" /></a></td>
                                         <td><img src="../assets/img/onlylogo.png" alt="logo di travel_io senza scritta" width="50"/></td>
                                     </tr>
                                 </tbody>
@@ -183,7 +210,7 @@
             
                         <br>
                 
-                        <input type="submit" value="cambia password" @click.stop.prevent="changePsw()" @click="showForm = !showForm" :disabled="allowButtonChange()">
+                        <input type="submit" value="cambia password" @click.stop.prevent="changePsw()" @click="showFormChange = !showFormChange" :disabled="allowButtonChange()">
                     </form>
                 </div>
     
@@ -191,42 +218,140 @@
             </div>
         </div>
 
+        
+
         <div v-else>
-            <form class="form-box" action="login" method="POST">
-                <div id="headerForm">
-                    <img src="../assets/img/onlylogo.png" alt="logo di travel_io senza scritta" width="50">
+            <div v-if="!showFormSignup">
+                <form class="form-box" action="login" method="POST">
+                    <div id="headerForm">
+                        <img src="../assets/img/onlylogo.png" alt="logo di travel_io senza scritta" width="50">
+                        <br>
+                        <br>
+                        <h1 style="color: var(--white);">login</h1>
+                    </div>
+
+                    <br>
+
+                    <label for="username">username</label>
+                    <br>
+                    <input type="text" name="username" v-model="username" @input="checkNumCharUser()" /><span class="counter">{{ username?.length }}/20</span>
+
                     <br>
                     <br>
-                    <h1 style="color: var(--white);">login</h1>
-                </div>
 
-                <br>
+                    <label for="password">password</label>
+                    <br>
+                    <input type="password" name="password" v-model="password" @input="checkNumCharPsw()" /><span class="counter">{{ password.length }}/20</span>
 
-                <label for="username">username</label>
-                <br>
-                <input type="text" name="username" v-model="username" @input="checkNumCharUser()" /><span class="counter">{{ username.length }}/20</span>
+                    <br>
+                    <br>
 
-                <br>
-                <br>
+                    <label>Non hai un account? Registrati</label>
+                    <br>
+                    <label for="signup"><a id="signup" @click="showFormSignup = true">signup</a></label>
 
-                <label for="password">password</label>
-                <br>
-                <input type="password" name="password" v-model="password" @input="checkNumCharPsw()" /><span class="counter">{{ password.length }}/20</span>
+                    <br>
 
-                <br>
-                <br>
+                    <input class="btn-submit" type="submit" value="login" :disabled="allowButtonLog()" @click.stop.prevent="login()">
 
-                <label>Non hai un account? Registrati</label>
-                <br>
-                <label for="signup"><RouterLink id="signup" to="/signup">signup</RouterLink></label>
+                </form>
+            </div>
+            
+            <div v-else>
+                <form class="form-box" action="signup" method="POST">
+                    <div id="headerForm">  
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td><a @click="showFormSignup = !showFormSignup"><img src="../assets/img/icon/arrowWhite.png" alt="icona freccia sinistra" /></a></td>
+                                        <td><img src="../assets/img/onlylogo.png" alt="logo di travel_io senza scritta" width="50"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>   
+                        </div>
 
-                <br>
+                    <div id="headerForm">
+                        <h1 style="color: var(--white);">signup</h1>
+                    </div>
 
-                <input class="btn-submit" type="submit" value="login" :disabled="allowButtonLog()" @click.stop.prevent="login()">
+                    <br>
 
-            </form>
+                    <div class="boxForTwo">
+                        <div class="boxOne">
+                            <label for="name">Nome</label>
+                            <br>
+                            <input type="text" name="name" v-model="name" />
+                        </div>
+            
+            
+                        <br>
+                        <br>
+            
+                        <div class="boxTwo">
+                            <label for="surname">Cognome</label>
+                            <br>
+                            <input type="text" name="surname" v-model="surname" />
+                        </div>
+                    </div>
+
+                    <br>
+                    <br>
+                    
+                    <label for="email">email</label>
+                    <br>
+                    <input type="email" name="email" v-model="email" />
+
+                    <br>
+                    <br>
+
+                    <div class="boxForTwo">
+
+                        <div class="boxOne">
+                            <label for="city">Citta di residenza</label>
+                            <br>
+                            <input type="text" name="city" v-model="city" />
+                        </div>
+            
+                        <br>
+                        <br>
+
+                        <div class="boxTwo">
+                            <label for="favCity">Citta preferita</label>
+                            <br>
+                            <input type="text" name="favCity" v-model="favCity" />
+                        </div>
+                    </div>
+
+
+                    <br>
+                    <br>
+
+                    <label for="age">et&agrave;</label>
+                    <br>
+                    <input type="number" name="age" min="16" max="99" v-model="age" /><br>
+                    <br>
+
+                    <label for="username">username</label>
+                    <br>
+                    <input type="text" name="username" v-model="username" />
+
+                    <br>
+                    <br>
+
+                    <label for="password">password</label>
+                    <br>
+                    <input type="password" name="password" v-model="password">
+
+                    <br>
+                    <br>
+
+                    <input class="btn-submit" type="submit" value="sign up" @click.stop.prevent="signup()">
+
+                </form>
+
+            </div>
+
         </div>
-
     </div>
 </template>
 
