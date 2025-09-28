@@ -6,7 +6,7 @@
     export default{
         data(){
             return{
-                username: '',
+                username: "",
                 password: '',
                 userInfo: [],
                 name: '',
@@ -68,7 +68,7 @@
                 }
             },
             allowButtonLog(){
-                return this.username === '';
+                return this.username === "";
             },
             checkLogin(){
                 if (useSessionStore().getUser()) return true;
@@ -294,7 +294,7 @@
 
                     <label for="username">username</label>
                     <br>
-                    <input type="text" name="username" v-model="username" @input="checkNumCharUser()" /><span class="counter">{{username?.length }}/20</span>
+                    <input type="text" name="username" v-model="username" @input="checkNumCharUser()" /><span class="counter">{{username.length }}/20</span>
 
                     <br>
                     <br>
@@ -393,7 +393,7 @@
 
                     <label for="username">username</label>
                     <br>
-                    <input type="text" name="username" v-model="username" @input="checkNumCharUser()" /><span class="counter">{{ username?.length }}/20</span>
+                    <input type="text" name="username" v-model="username" @input="checkNumCharUser()" /><span class="counter">{{ username.length }}/20</span>
 
                     <br>
                     <br>
