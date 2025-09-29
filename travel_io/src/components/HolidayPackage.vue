@@ -38,25 +38,25 @@
 
     <br>
     <div id="holidayPackage">
-        <img :src="getUrlImage()" alt="Foto della destinazione" width="400">
+        <img :src="getUrlImage()" alt="Foto della destinazione" width="300" height="400">
         <div>
             <h1>{{ destination }}</h1>
             <p> {{ info }} <br><br></p>
+            <div>
+                <div id="holidayDetails">
+                    <div>
+                        <h3>Durata: </h3><p><b>{{ days }} giorni</b></p><br><br>
+                    </div>
+                    <div>
+                        <h3>Data partenza: &emsp;&emsp;</h3><p><b>{{ departure }}</b></p><br><br>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <br>
     
-    <div>
-        <div id="holidayDetails">
-            <div>
-                <h3>Durata: </h3><p><b>{{ days }} giorni</b></p><br><br>
-            </div>
-            <div>
-                <h3>Data partenza: &emsp;&emsp;</h3><p><b>{{ departure }}</b></p><br><br>
-            </div>
-        </div>
-    </div>
     
     <h3 style="float: right">€{{ price }}</h3>
     
@@ -76,6 +76,12 @@
         #holidayPackage p, #holidayPackage h1{
             margin-left: 15px;
         }
+        #holidayPackage img{
+            border-radius: 25px;
+        }
+        #holidayDetails{
+            margin-left: 15px;
+        }
     }
 
     @media only screen and (max-width: 768px){
@@ -92,8 +98,7 @@
         border-radius: 25px;
         padding: 15px;
         background-color: rgba(80, 76, 76, 0.125);
-        width: 450px;
-        margin: auto;
+        width: auto;
     }
 
     #holidayDetails h3 {

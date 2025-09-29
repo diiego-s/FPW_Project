@@ -45,7 +45,7 @@
             },
 
             checkDays() {
-                if(this.days > this.maxDays || this.days < 1){
+                if(this.days > this.maxDays || this.days < 1 || !Number.isInteger(this.days)){
                     this.daysStyle.color = 'red';
                     return true;
                 } else {
@@ -96,7 +96,7 @@
             <br>
 
             <label for="price">Costo: </label>
-            <input type="number" name="price" min="1" max="10000" v-model="price" :style="priceStyle"><br> <span v-if="checkPrice()">Devi inserire un prezzo compreso tra 1 e 10000 </span>
+            <input type="number" name="price" min="0.1" max="10000" v-model="price" :style="priceStyle"><br> <span v-if="checkPrice()">Devi inserire un prezzo compreso tra 1 e 10000 </span>
 
             <br>
             <br>
@@ -114,7 +114,7 @@
             <br>
 
             <label for="days">Giorni di soggiorno: </label>
-            <input type="number" name="days" min="1" max="31" v-model="days" :style="daysStyle"> <span v-if="checkDays()"> Devi inserire una data compresa tra 1 e 31 </span>
+            <input type="number" name="days" min="1" max="31" v-model="days" :style="daysStyle"><br> <span v-if="checkDays()"> Devi inserire una data compresa tra 1 e 31 </span>
 
 
             <br>

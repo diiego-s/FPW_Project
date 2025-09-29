@@ -1,2 +1,0 @@
-01/08 - D
-    creazione del server e progetto vue. Creato il collegamento al database con il file db.js

@@ -1,6 +1,6 @@
 <template>
      <footer>
-            <h3 id="footerTitle">travel_io</h3>
+            <h3 id="footerTitle">falliti</h3>
             <ul id="footerContent">
                 <li>Diego Serra - <a href="mailto:d.serra126@studenti.unica.it">d.serra126@studenti.unica.it</a> - 60/61/66505</li>
                 <li>Giulia Cannata - <a href="mailto:g.cannata4@studenti.unica.it">g.cannata4@studenti.unica.it</a> - 60/61/66464</li>

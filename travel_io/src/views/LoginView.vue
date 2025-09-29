@@ -141,11 +141,13 @@
                 const data = await Api.addUser(this.username, this.password,
                     this.name, this.surname, this.email,
                     this.city, this.favCity, this.age);
-                if(data){
+                if(data.message === 'User already exists'){
+                    alert('user already exists');
+                } else if(data){
                     alert('user added');
                     this.$router.push('/');
                 } else {
-                    alert('error');
+                    alert('generic error');
                 }
             },
             getUserByUsername() {
